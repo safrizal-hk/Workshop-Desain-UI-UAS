@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycle | Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        darkgray: '#1a1a1a',
+                        lightgray: '#f5f5f5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .hamburger-line {
+            display: block;
+            width: 24px;
+            height: 2px;
+            margin: 5px auto;
+            background-color: #f5f5f5;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger.open .line1 {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open .line2 {
+            opacity: 0;
+        }
+        .hamburger.open .line3 {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .mobile-menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="border-b border-gray-700 px-4 sm:px-10 py-3 sticky top-0 bg-[#141414] z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_6_319)">
+                        <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+                    </g>
+                    <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
+                </svg>
+                <h2 class="text-lg font-bold">Cycle</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
+                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
+                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
+                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
+                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
+                <a href="articles.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+                <a href="cart.html" class="text-sm font-medium hover:text-gray-300">Cart</a>
+            </nav>
+            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+                <span class="hamburger-line line1"></span>
+                <span class="hamburger-line line2"></span>
+                <span class="hamburger-line line3"></span>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
+            <nav class="flex flex-col items-center py-4 space-y-4">
+                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
+                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
+                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
+                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
+                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
+                <a href="articles.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+                <a href="cart.html" class="text-sm font-medium hover:text-gray-300">Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section id="checkout" class="py-12 bg-dark">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8">Checkout</h2>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Billing and Payment Form -->
+                <div class="lg:w-2/3 bg-darkgray rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Billing Information</h3>
+                    <form id="checkout-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="full-name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                                <input type="text" id="full-name" name="full-name" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                                <input type="email" id="email" name="email" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-300">Address</label>
+                            <input type="text" id="address" name="address" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="123 Main St" required>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-300">City</label>
+                                <input type="text" id="city" name="city" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="Jakarta" required>
+                            </div>
+                            <div>
+                                <label for="postal-code" class="block text-sm font-medium text-gray-300">Postal Code</label>
+                                <input type="text" id="postal-code" name="postal-code" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="12345" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-300">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="+62 123 456 7890" required>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">Payment Method</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <input type="radio" id="credit-card" name="payment-method" value="credit-card" class="h-4 w-4 text-gray-700 bg-darkgray border-gray-700 focus:ring-0" checked>
+                                    <label for="credit-card" class="ml-2 text-sm font-medium text-gray-300">Credit Card</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="paypal" name="payment-method" value="paypal" class="h-4 w-4 text-gray-700 bg-darkgray border-gray-700 focus:ring-0">
+                                    <label for="paypal" class="ml-2 text-sm font-medium text-gray-300">PayPal</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer" class="h-4 w-4 text-gray-700 bg-darkgray border-gray-700 focus:ring-0">
+                                    <label for="bank-transfer" class="ml-2 text-sm font-medium text-gray-300">Bank Transfer</label>
+                                </div>
+                            </div>
+                            <!-- Credit Card Details -->
+                            <div id="credit-card-details" class="mt-4 space-y-4">
+                                <div>
+                                    <label for="card-number" class="block text-sm font-medium text-gray-300">Card Number</label>
+                                    <input type="text" id="card-number" name="card-number" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="1234 5678 9012 3456" required>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="expiry-date" class="block text-sm font-medium text-gray-300">Expiry Date</label>
+                                        <input type="text" id="expiry-date" name="expiry-date" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="MM/YY" required>
+                                    </div>
+                                    <div>
+                                        <label for="cvv" class="block text-sm font-medium text-gray-300">CVV</label>
+                                        <input type="text" id="cvv" name="cvv" class="mt-1 w-full bg-darkgray border border-gray-700 rounded-lg p-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" placeholder="123" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" id="place-order-btn" class="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600">Place Order</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Order Summary -->
+                <div class="lg:w-1/3 bg-darkgray rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Order Summary</h3>
+                    <div id="order-items" class="space-y-4">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="border-t border-gray-700 mt-6 pt-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-lg font-medium">Subtotal</span>
+                            <span id="order-subtotal" class="text-lg font-medium">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-lg font-medium">Shipping (Estimated)</span>
+                            <span id="order-shipping" class="text-lg font-medium">$10.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xl font-bold">
+                            <span>Total</span>
+                            <span id="order-total" class="text-xl font-bold">$10.00</span>
+                        </div>
+                    </div>
+                    <a href="cart.html" class="mt-6 inline-block text-gray-300 hover:text-white underline">Edit Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Bicycles</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Road Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Mountain Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Urban Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Electric Bikes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Accessories</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Helmets</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Lights</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Locks</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Pumps</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Clothing</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Jerseys</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Shorts</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Gloves</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Jackets</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Components</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Groupsets</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Wheels</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Tires</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Saddles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Workshop</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Repairs</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Maintenance</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Custom Builds</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Fitting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2023 Cycle. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const checkoutForm = document.getElementById('checkout-form');
+            const creditCardDetails = document.getElementById('credit-card-details');
+            const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+            const orderItemsContainer = document.getElementById('order-items');
+            const orderSubtotal = document.getElementById('order-subtotal');
+            const orderShipping = document.getElementById('order-shipping');
+            const orderTotal = document.getElementById('order-total');
+
+            // Sample cart data (replace with real data from cart.html or localStorage)
+            const cart = [
+                {
+                    id: 1,
+                    name: 'Road Bike Pro',
+                    price: 1200.00,
+                    quantity: 1,
+                    image: 'https://images.unsplash.com/photo-1485965127658-0a7dd765f3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    selected: true
+                },
+                {
+                    id: 2,
+                    name: 'Cycling Helmet',
+                    price: 80.00,
+                    quantity: 2,
+                    image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                    selected: true
+                }
+            ];
+
+            // Function to render order summary
+            function renderOrderSummary() {
+                orderItemsContainer.innerHTML = '';
+                const selectedItems = cart.filter(item => item.selected);
+                if (selectedItems.length === 0) {
+                    orderItemsContainer.innerHTML = '<p class="text-gray-400">No items selected.</p>';
+                    orderSubtotal.textContent = '$0.00';
+                    orderShipping.textContent = '$0.00';
+                    orderTotal.textContent = '$0.00';
+                    return;
+                }
+
+                selectedItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'flex items-center gap-4';
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="text-sm font-medium">${item.name}</h4>
+                            <p class="text-sm text-gray-400">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                        <p class="text-sm font-medium">$${(item.price * item.quantity).toFixed(2)}</p>
+                    `;
+                    orderItemsContainer.appendChild(itemElement);
+                });
+
+                const subtotal = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const shipping = subtotal > 0 ? 10.00 : 0;
+                const total = subtotal + shipping;
+                orderSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                orderShipping.textContent = `$${shipping.toFixed(2)}`;
+                orderTotal.textContent = `$${total.toFixed(2)}`;
+            }
+
+            // Toggle credit card details based on payment method
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    if (this.value === 'credit-card') {
+                        creditCardDetails.classList.remove('hidden');
+                        creditCardDetails.querySelectorAll('input').forEach(input => input.required = true);
+                    } else {
+                        creditCardDetails.classList.add('hidden');
+                        creditCardDetails.querySelectorAll('input').forEach(input => input.required = false);
+                    }
+                });
+            });
+
+            // Form submission with basic validation
+            checkoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const selectedItems = cart.filter(item => item.selected);
+                if (selectedItems.length === 0) {
+                    alert('Please select at least one item to proceed.');
+                    return;
+                }
+
+                const formData = new FormData(checkoutForm);
+                const fullName = formData.get('full-name');
+                const email = formData.get('email');
+                const address = formData.get('address');
+                const city = formData.get('city');
+                const postalCode = formData.get('postal-code');
+                const phone = formData.get('phone');
+                const paymentMethod = formData.get('payment-method');
+
+                // Basic email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                // Placeholder for payment processing
+                alert(`Order placed successfully!\n\nBilling: ${fullName}, ${email}, ${address}, ${city}, ${postalCode}, ${phone}\nPayment Method: ${paymentMethod}\nItems: ${selectedItems.length}\nTotal: $${orderTotal.textContent.slice(1)}`);
+                // In a real app, send data to a backend or payment gateway
+            });
+
+            // Hamburger menu toggle
+            hamburgerBtn.addEventListener('click', function() {
+                hamburgerBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Initial render
+            renderOrderSummary();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycle | Article Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        darkgray: '#1a1a1a',
+                        lightgray: '#f5f5f5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .hamburger-line {
+            display: block;
+            width: 24px;
+            height: 2px;
+            margin: 5px auto;
+            background-color: #f5f5f5;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger.open .line1 {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.open .line2 {
+            opacity: 0;
+        }
+        .hamburger.open .line3 {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .mobile-menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="border-b border-gray-700 px-4 sm:px-10 py-3 sticky top-0 bg-[#141414] z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_6_319)">
+                        <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+                    </g>
+                    <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
+                </svg>
+                <h2 class="text-lg font-bold">Cycle</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
+                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
+                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
+                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
+                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
+                <a href="articles.html" class="text-sm font-medium text-white">Articles</a>
+            </nav>
+            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+                <span class="hamburger-line line1"></span>
+                <span class="hamburger-line line2"></span>
+                <span class="hamburger-line line3"></span>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
+            <nav class="flex flex-col items-center py-4 space-y-4">
+                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
+                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
+                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
+                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
+                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
+                <a href="articles.html" class="text-sm font-medium text-white">Articles</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Article Detail Section -->
+    <section id="article-detail" class="py-12 bg-dark">
+        <div class="max-w-7xl mx-auto px-4">
+            <a href="articles.html" class="text-gray-400 hover:text-white mb-6 inline-block">← Back to Articles</a>
+            <div id="article-content" class="bg-darkgray rounded-lg overflow-hidden">
+                <img id="article-image" src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Riding Through The City" class="w-full h-64 md:h-96 object-cover rounded-t-lg">
+                <div class="p-8">
+                    <h2 id="article-title" class="text-3xl font-bold mb-4">Riding Through The City</h2>
+                    <p id="article-meta" class="text-gray-500 text-sm mb-6">May 10, 2025 • 5 min read</p>
+                    <div id="article-body" class="prose prose-invert max-w-none mb-8">
+                        <p>Urban cycling offers a unique blend of convenience, exercise, and eco-friendly transportation. However, navigating city streets requires skill and awareness. In this article, we share essential tips for safe and efficient urban cycling.</p>
+                        <h3>1. Plan Your Route</h3>
+                        <p>Before you set out, use apps like Google Maps or Strava to find bike-friendly routes. Look for dedicated bike lanes, low-traffic streets, or shared paths to make your ride safer and more enjoyable.</p>
+                        <h3>2. Stay Visible</h3>
+                        <p>Wear bright clothing and equip your bike with front and rear lights, especially during dawn, dusk, or nighttime rides. Reflective gear can also help you stand out to drivers and pedestrians.</p>
+                        <h3>3. Follow Traffic Rules</h3>
+                        <p>Obey traffic signals, stop at red lights, and yield to pedestrians. Signal your turns clearly to communicate with drivers and other cyclists.</p>
+                        <p>By following these tips, you can make urban cycling a rewarding part of your daily routine. Happy riding!</p>
+                    </div>
+                    <!-- Like and Comment Section -->
+                    <div class="flex items-center gap-6 border-t border-gray-700 pt-6">
+                        <button id="like-btn" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            <span id="like-count">0</span> Likes
+                        </button>
+                        <button id="comment-btn" class="flex items-center gap-2 text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            <span id="comment-count">0</span> Comments
+                        </button>
+                    </div>
+                    <!-- Comment Input Section -->
+                    <div id="comment-section" class="mt-6">
+                        <textarea id="comment-input" class="w-full bg-darkgray border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500" rows="4" placeholder="Add a comment..."></textarea>
+                        <div class="flex justify-end gap-4 mt-4">
+                            <button id="cancel-comment" class="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+                            <button id="submit-comment" class="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600">Submit</button>
+                        </div>
+                        <div id="comment-list" class="mt-6 space-y-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Bicycles</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Road Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Mountain Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Urban Bikes</a></li>
+                        <li><a href="index.html#bicycles" class="text-gray-400 hover:text-white transition">Electric Bikes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Accessories</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Helmets</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Lights</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Locks</a></li>
+                        <li><a href="index.html#accessories" class="text-gray-400 hover:text-white transition">Pumps</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Clothing</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Jerseys</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Shorts</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Gloves</a></li>
+                        <li><a href="index.html#clothing" class="text-gray-400 hover:text-white transition">Jackets</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Components</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Groupsets</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Wheels</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Tires</a></li>
+                        <li><a href="index.html#components" class="text-gray-400 hover:text-white transition">Saddles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Workshop</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Repairs</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Maintenance</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Custom Builds</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition">Fitting</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2023 Cycle. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            hamburgerBtn.addEventListener('click', function() {
+                hamburgerBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Like and Comment Functionality
+            const likeBtn = document.getElementById('like-btn');
+            const likeCount = document.getElementById('like-count');
+            const commentBtn = document.getElementById('comment-btn');
+            const commentSection = document.getElementById('comment-section');
+            const commentInput = document.getElementById('comment-input');
+            const submitComment = document.getElementById('submit-comment');
+            const cancelComment = document.getElementById('cancel-comment');
+            const commentList = document.getElementById('comment-list');
+            const commentCount = document.getElementById('comment-count');
+
+            let likes = 0;
+            let comments = [];
+
+            likeBtn.addEventListener('click', function() {
+                likes++;
+                likeCount.textContent = likes;
+                likeBtn.classList.add('text-white');
+            });
+
+            commentBtn.addEventListener('click', function() {
+                commentSection.classList.toggle('hidden');
+            });
+
+            cancelComment.addEventListener('click', function() {
+                commentSection.classList.add('hidden');
+                commentInput.value = '';
+            });
+
+            submitComment.addEventListener('click', function() {
+                const commentText = commentInput.value.trim();
+                if (commentText) {
+                    comments.push(commentText);
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'bg-dark p-4 rounded-lg';
+                    commentElement.innerHTML = `
+                        <p class="text-sm text-gray-300">${commentText}</p>
+                        <p class="text-xs text-gray-500 mt-2">Posted on ${new Date().toLocaleDateString()}</p>
+                    `;
+                    commentList.appendChild(commentElement);
+                    commentCount.textContent = comments.length;
+                    commentInput.value = '';
+                    commentSection.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
