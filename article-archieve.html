@@ -63,42 +63,39 @@
 <body>
     <!-- Header -->
     <header class="border-b border-gray-700 px-4 sm:px-10 py-3 sticky top-0 bg-[#141414] z-50">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_6_319)">
-                        <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
-                    </g>
-                    <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
-                </svg>
-                <h2 class="text-lg font-bold">Cycle</h2>
-            </div>
-            <nav class="hidden md:flex items-center gap-6">
-                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
-                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
-                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
-                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
-                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
-                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
-                <a href="#" class="text-sm font-medium text-white">Articles</a>
-            </nav>
-            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
-                <span class="hamburger-line line1"></span>
-                <span class="hamburger-line line2"></span>
-                <span class="hamburger-line line3"></span>
-            </button>
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_6_319)">
+              <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+            </g>
+            <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
+          </svg>
+          <h2 class="text-lg font-bold">Cycle</h2>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
-            <nav class="flex flex-col items-center py-4 space-y-4">
-                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
-                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
-                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
-                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
-                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
-                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
-                <a href="#" class="text-sm font-medium text-white">Articles</a>
-            </nav>
-        </div>
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+          <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
+          <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+          <a href="about-us.html" c lass="text-sm font-medium hover:text-gray-300">About</a>
+        </nav>
+        <!-- Hamburger Button -->
+        <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+          <span class="hamburger-line line1"></span>
+          <span class="hamburger-line line2"></span>
+          <span class="hamburger-line line3"></span>
+        </button>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
+        <nav class="flex flex-col items-center py-4 space-y-4">
+          <a href="#" class="text-sm font-medium hover:text-gray-300">Home</a>
+          <a href="#" class="text-sm font-medium hover:text-gray-300">Products</a>
+          <a href="#" class="text-sm font-medium hover:text-gray-300">Article</a>
+          <a href="#" class="text-sm font-medium hover:text-gray-300">About</a>
+        </nav>
+      </div>
     </header>
 
     <!-- Article List Section -->
