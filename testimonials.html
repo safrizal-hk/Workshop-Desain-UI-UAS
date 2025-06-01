@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cycle | Road Bike Pro</title>
+    <title>Cycle | Testimonials</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -58,8 +58,11 @@
             max-height: 300px;
             opacity: 1;
         }
-        .star-rating {
-            color: #FFD700; /* Gold for stars */
+        .star-rating .filled {
+            color: #FFD700; /* Gold for filled stars */
+        }
+        .star-rating .empty {
+            color: #A0A0A0; /* Gray for empty stars */
         }
     </style>
 </head>
@@ -95,81 +98,17 @@
         <nav class="flex flex-col items-center py-4 space-y-4">
           <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
           <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
-          <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+          <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Article</a>
           <a href="about-us.html" class="text-sm font-medium hover:text-gray-300">About</a>
         </nav>
       </div>
     </header>
 
-    <!-- Product Detail Section -->
-    <section id="product-detail" class="py-12 bg-dark">
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-12 bg-dark">
         <div class="max-w-7xl mx-auto px-4">
-            <a href="product-catalog.html" class="text-gray-400 hover:text-white mb-6 inline-block">← Back to Catalog</a>
-            <!-- Product Card -->
-            <div class="bg-darkgray rounded-lg overflow-hidden">
-                <div class="flex flex-col md:flex-row">
-                    <div class="md:w-1/3 p-4">
-                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Road Bike Pro" class="w-full h-64 md:h-full object-cover rounded-lg">
-                    </div>
-                    <div class="p-8 md:w-2/3">
-                        <h2 class="text-3xl font-bold mb-2">Road Bike Pro</h2>
-                        <p class="text-2xl font-semibold text-lightgray mb-6">$1,200</p>
-                        <div class="prose prose-invert max-w-none">
-                            <h3 class="text-gray-500 text-sm mb-4">Description</h3>
-                            <p>The Road Bike Pro is designed for speed and efficiency on paved roads. With a lightweight carbon frame and aerodynamic design, this bike is perfect for competitive cyclists and enthusiasts alike.</p>
-                            <h3>Specifications</h3>
-                            <ul>
-                                <li>Frame: Carbon Fiber</li>
-                                <li>Weight: 8.5 kg</li>
-                                <li>Gears: 22-speed Shimano Ultegra</li>
-                                <li>Tires: 700c x 25mm</li>
-                            </ul>
-                        </div>
-                        <button id="add-to-cart" class="mt-6 bg-white text-dark font-medium py-2 px-4 rounded-lg hover:bg-gray-200 transition">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Review Card -->
-            <div class="bg-darkgray rounded-lg mt-8">
-                <div class="p-8">
-                    <h2 class="text-3xl font-bold mb-8">Customer Reviews</h2>
-                    <div class="space-y-4">
-                        <!-- Review 1 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="John Doe" class="w-12 h-12 rounded-full object-cover mr-4">
-                                <div>
-                                    <span class="font-semibold text-lightgray">John Doe</span>
-                                    <div class="star-rating">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="text-gray-400 text-sm">"This bike is a game-changer! Super lightweight and smooth on the road. Perfect for my daily commutes and weekend races."</p>
-                        </div>
-                        <!-- Review 2 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Sarah Miller" class="w-12 h-12 rounded-full object-cover mr-4">
-                                <div>
-                                    <span class="font-semibold text-lightgray">Sarah Miller</span>
-                                    <div class="star-rating">★★★★☆</div>
-                                </div>
-                            </div>
-                            <p class="text-gray-400 text-sm">"Great bike for the price. The carbon frame is sturdy, but I wish the tires were a bit more durable for rougher terrains."</p>
-                        </div>
-                        <!-- Review 3 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Mike Johnson" class="w-12 h-12 rounded-full object-cover mr-4">
-                                <div>
-                                    <span class="font-semibold text-lightgray">Mike Johnson</span>
-                                    <div class="star-rating">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="text-gray-400 text-sm">"Absolutely love the Road Bike Pro! The Shimano gears shift seamlessly, and it feels like flying on the highway."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="text-3xl font-bold mb-8 text-center">Customer Testimonials</h2>
+            <div id="review-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
     </section>
 
@@ -182,7 +121,7 @@
                         <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
+                        <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-tight">Store Location</h3>
                         <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-tight">
                             Jl. Airlangga No.4-6-8, Airlangga, Kec. Gubeng, Kota Surabaya, Jawa Timur 60115
                         </p>
@@ -221,25 +160,89 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const addToCartBtn = document.getElementById('add-to-cart');
+            const reviewList = document.getElementById('review-list');
 
+            // Toggle mobile menu
             hamburgerBtn.addEventListener('click', function() {
                 hamburgerBtn.classList.toggle('open');
                 mobileMenu.classList.toggle('open');
             });
 
-            // Add to Cart functionality
-            addToCartBtn.addEventListener('click', function() {
-                // Store product data in sessionStorage
-                const product = {
-                    id: '1',
-                    name: 'Road Bike Pro',
-                    price: '$1,200',
-                    image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                };
-                sessionStorage.setItem('cartProduct', JSON.stringify(product));
-                // Redirect to cart page
-                window.location.href = 'cart.html';
+            // Mock review data with item images
+            const reviews = [
+                {
+                    name: 'John Doe',
+                    rating: 5,
+                    text: 'The Road Bike Pro is amazing! Super lightweight and perfect for long rides. Highly recommend Cycle!',
+                    date: '2025-05-28',
+                    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+                    itemName: 'Road Bike Pro',
+                    itemImage: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+                },
+                {
+                    name: 'Sarah Miller',
+                    rating: 4,
+                    text: 'Great service at the workshop. My bike feels brand new after the tune-up, though it took a bit longer than expected.',
+                    date: '2025-05-25',
+                    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+                    itemName: 'Basic Tune-Up Service',
+                    itemImage: 'https://images.unsplash.com/photo-1593767175484-80b9917a6ed7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+                },
+                {
+                    name: 'Mike Johnson',
+                    rating: 5,
+                    text: 'Love the cycling jersey! Comfortable and stylish. Fast delivery too!',
+                    date: '2025-05-20',
+                    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+                    itemName: 'Cycling Jersey',
+                    itemImage: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+                },
+                {
+                    name: 'Emily Chen',
+                    rating: 3,
+                    text: 'The LED bike light is decent, but the battery life could be better. Good customer support though.',
+                    date: '2025-05-15',
+                    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+                    itemName: 'LED Bike Light',
+                    itemImage: 'https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+                },
+                {
+                    name: 'David Brown',
+                    rating: 5,
+                    text: 'Custom bike build was worth every penny. The team at Cycle really knows their stuff!',
+                    date: '2025-05-10',
+                    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80',
+                    itemName: 'Custom Bike Build',
+                    itemImage: 'https://images.unsplash.com/photo-1593767175484-80b9917a6ed7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'
+                }
+            ];
+
+            // Sort reviews by date (newest first)
+            reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Render reviews
+            reviews.forEach(review => {
+                const stars = Array(5).fill(0).map((_, i) => 
+                    i < review.rating ? '<span class="filled">★</span>' : '<span class="empty">★</span>'
+                ).join('');
+                const reviewCard = `
+                    <div class="bg-darkgray rounded-lg p-6 transition transform hover:scale-105">
+                        <div class="flex items-center mb-4">
+                            <img src="${review.image}" alt="${review.name}" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-lightgray">${review.name}</h3>
+                                <div class="star-rating">${stars}</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">"${review.text}"</p>
+                        <div class="flex items-center mb-4">
+                            <img src="${review.itemImage}" alt="${review.itemName}" class="w-20 h-20 rounded-md object-cover mr-4">
+                            <span class="text-lightgray text-sm font-medium">${review.itemName}</span>
+                        </div>
+                        <p class="text-gray-500 text-xs">${new Date(review.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    </div>
+                `;
+                reviewList.innerHTML += reviewCard;
             });
         });
     </script>

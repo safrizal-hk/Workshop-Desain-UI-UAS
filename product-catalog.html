@@ -58,127 +58,160 @@
             max-height: 300px;
             opacity: 1;
         }
+        /* Search bar styling */
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+        .search-container input {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .search-container::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .clear-btn {
+            display: none;
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #A0A0A0;
+        }
+        .search-container input:not(:placeholder-shown) + .clear-btn {
+            display: block;
+        }
+        .clear-btn:hover {
+            color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="border-b border-gray-700 px-4 sm:px-10 py-3 sticky top-0 bg-[#141414] z-50">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_6_319)">
-              <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
-            </g>
-            <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
-          </svg>
-          <h2 class="text-lg font-bold">Cycle</h2>
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <svg class="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_6_319)">
+                        <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+                    </g>
+                    <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
+                </svg>
+                <h2 class="text-lg font-bold">Cycle</h2>
+            </div>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
+                <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+                <a href="about-us.html" class="text-sm font-medium hover:text-gray-300">About</a>
+            </nav>
+            <!-- Hamburger Button -->
+            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+                <span class="hamburger-line line1"></span>
+                <span class="hamburger-line line2"></span>
+                <span class="hamburger-line line3"></span>
+            </button>
         </div>
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-6">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
+            <nav class="flex flex-col items-center py-4 space-y-4">
           <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
           <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
-          <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
-          <a href="about-us.html" c lass="text-sm font-medium hover:text-gray-300">About</a>
+          <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Article</a>
+          <a href="about-us.html" class="text-sm font-medium hover:text-gray-300">About</a>
         </nav>
-        <!-- Hamburger Button -->
-        <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
-          <span class="hamburger-line line1"></span>
-          <span class="hamburger-line line2"></span>
-          <span class="hamburger-line line3"></span>
-        </button>
-      </div>
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
-        <nav class="flex flex-col items-center py-4 space-y-4">
-          <a href="#" class="text-sm font-medium hover:text-gray-300">Home</a>
-          <a href="#" class="text-sm font-medium hover:text-gray-300">Products</a>
-          <a href="#" class="text-sm font-medium hover:text-gray-300">Article</a>
-          <a href="#" class="text-sm font-medium hover:text-gray-300">About</a>
-        </nav>
-      </div>
+        </div>
     </header>
 
     <!-- Product Catalog Section -->
     <section id="catalog" class="py-12 bg-dark">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8">Product Catalog</h2>
-            <!-- Bicycles Section -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-4">Bicycles</h3>
-                <div id="bicycles-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            <!-- Search Bar -->
+            <div class="mb-6 search-container">
+                <input type="text" id="search-bar" placeholder="Search products..." class="w-full px-4 py-2 bg-darkgray text-lightgray rounded-lg focus:outline-none focus:ring-2 focus:ring-white transition">
+                <span class="clear-btn" id="clear-search">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
             </div>
-            <!-- Accessories Section -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-4">Accessories</h3>
-                <div id="accessories-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap gap-4 mb-8">
+                <button data-category="Bicycles" class="category-btn px-4 py-2 bg-white text-dark rounded-lg hover:bg-white hover:text-dark transition font-medium">Bicycles</button>
+                <button data-category="Accessories" class="category-btn px-4 py-2 bg-darkgray text-lightgray rounded-lg hover:bg-white hover:text-dark transition font-medium">Accessories</button>
+                <button data-category="Clothing" class="category-btn px-4 py-2 bg-darkgray text-lightgray rounded-lg hover:bg-white hover:text-dark transition font-medium">Clothing</button>
+                <button data-category="Workshop" class="category-btn px-4 py-2 bg-darkgray text-lightgray rounded-lg hover:bg-white hover:text-dark transition font-medium">Workshop</button>
             </div>
-            <!-- Clothing Section -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-4">Clothing</h3>
-                <div id="clothing-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-            </div>
-            <!-- Workshop Section -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold mb-4">Workshop</h3>
-                <div id="workshop-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-            </div>
+            <!-- Product List -->
+            <div id="product-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="w-full bg-[#121212] text-[#f5f5f5] px-6 md:px-12 lg:px-16 py-10 border-t border-[#252525]">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
-            <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
-                <div class="mb-6 md:mb-0 md:mr-10">
-                    <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
+                <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
+                    <div class="mb-6 md:mb-0 md:mr-10">
+                        <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
+                        <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
+                            Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Latest Article</h3>
-                    <h2 class="text-xl font-medium mb-3 text-center md:text-left text-[#f5f5f5] tracking-tight">Ready to Ride?</h2>
-                    <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
-                        Discover the joy of cycling with Cycle. Explore our latest tips, gear reviews, and community stories to inspire your next adventure on two wheels.
-                    </p>
+                <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
+                    <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Navigation</h3>
+                            <a href="landing-page.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Home</a>
+                            <a href="product-catalog.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Products</a>
+                            <a href="article-archieve.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Articles</a>
+                            <a href="about-us.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">About</a>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
+                            <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
+                            <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
+                            <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
-                <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Products</h3>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Bicycles</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Accessories</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Clothing</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Components</a>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
-                        <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
-                        <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
-                        <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
-                    </div>
+            <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
+                <p class="text-center">© 2010 — 2025 Cycle</p>
+                <div class="flex space-x-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
+                    <span>—</span>
+                    <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
-            <p class="text-center">© 2010 — 2025 Cycle</p>
-            <div class="flex space-x-4 mt-2 md:mt-0">
-                <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
-                <span>—</span>
-                <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            });
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productList = document.getElementById('product-list');
+            const searchBar = document.getElementById('search-bar');
+            const clearSearchBtn = document.getElementById('clear-search');
 
             // Mock product data
             const products = [
@@ -304,33 +337,75 @@
                 }
             ];
 
-            // Function to render products for a specific category
-            function renderProducts(category, containerId) {
-                const container = document.getElementById(containerId);
-                const filteredProducts = products.filter(product => product.category === category);
-                filteredProducts.forEach(product => {
+            // Function to render products
+            function renderProducts(productsToRender) {
+                productList.innerHTML = ''; // Clear current products
+                productsToRender.forEach(product => {
                     const productCard = `
-                        <div class="bg-darkgray rounded-lg overflow-hidden">
-                            <div class="p-4">
-                                <img src="${product.image}" alt="${product.alt}" class="w-full h-48 object-cover rounded-lg">
+                        <a href="product-detail.html?id=${product.id}" class="bg-darkgray rounded-lg overflow-hidden block group">
+                            <div class="overflow-hidden">
+                                <img src="${product.image}" alt="${product.alt}" class="w-full h-48 object-cover rounded-t-lg group-hover:scale-105 transition duration-500">
                             </div>
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold text-lightgray">${product.name}</h3>
                                 <p class="text-gray-400 text-sm mt-1">${product.category}</p>
                                 <p class="text-lightgray font-medium mt-2">${product.price}</p>
-                                <a href="product-detail.html?id=${product.id}" class="mt-4 inline-block bg-white text-dark font-medium py-2 px-4 rounded-lg hover:bg-gray-200 transition">View Details</a>
                             </div>
-                        </div>
+                        </a>
                     `;
-                    container.innerHTML += productCard;
+                    productList.innerHTML += productCard;
                 });
             }
 
-            // Render products for each category
-            renderProducts('Bicycles', 'bicycles-list');
-            renderProducts('Accessories', 'accessories-list');
-            renderProducts('Clothing', 'clothing-list');
-            renderProducts('Workshop', 'workshop-list');
+            // Initialize with Bicycles category
+            let currentCategory = 'Bicycles';
+            renderProducts(products.filter(product => product.category === currentCategory));
+
+            // Add event listeners to category buttons
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Reset all buttons to inactive state
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('bg-white', 'text-dark');
+                        btn.classList.add('bg-darkgray', 'text-lightgray');
+                    });
+                    // Set clicked button to active state
+                    this.classList.remove('bg-darkgray', 'text-lightgray');
+                    this.classList.add('bg-white', 'text-dark');
+                    // Update current category and render products
+                    currentCategory = this.getAttribute('data-category');
+                    if (searchBar.value.trim() === '') {
+                        renderProducts(products.filter(product => product.category === currentCategory));
+                    }
+                });
+            });
+
+            // Search bar functionality
+            searchBar.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                if (searchTerm === '') {
+                    // If search is empty, show products from current category
+                    renderProducts(products.filter(product => product.category === currentCategory));
+                } else {
+                    // Filter products by search term across all categories
+                    const filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(searchTerm)
+                    );
+                    renderProducts(filteredProducts);
+                }
+            });
+
+            // Clear search functionality
+            clearSearchBtn.addEventListener('click', function() {
+                searchBar.value = '';
+                renderProducts(products.filter(product => product.category === currentCategory));
+            });
+
+            // Toggle mobile menu
+            hamburgerBtn.addEventListener('click', function() {
+                hamburgerBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
         });
     </script>
 </body>

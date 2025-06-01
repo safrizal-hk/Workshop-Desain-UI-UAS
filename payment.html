@@ -82,14 +82,10 @@
                 <h2 class="text-lg font-bold">Cycle</h2>
             </div>
             <nav class="hidden md:flex items-center gap-6">
-                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
-                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
-                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
-                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
-                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
-                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
-                <a href="articles.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
-                <a href="cart.html" class="text-sm font-medium hover:text-gray-300">Cart</a>
+                <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
+                <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
+                <a href="about-us.html" class="text-sm font-medium hover:text-gray-300">About</a>
             </nav>
             <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
                 <span class="hamburger-line line1"></span>
@@ -99,14 +95,10 @@
         </div>
         <div id="mobile-menu" class="md:hidden bg-[#141414] border-b border-gray-700 mobile-menu">
             <nav class="flex flex-col items-center py-4 space-y-4">
-                <a href="index.html" class="text-sm font-medium hover:text-gray-300">Home</a>
-                <a href="index.html#bicycles" class="text-sm font-medium hover:text-gray-300">Bicycles</a>
-                <a href="index.html#accessories" class="text-sm font-medium hover:text-gray-300">Accessories</a>
-                <a href="index.html#clothing" class="text-sm font-medium hover:text-gray-300">Clothing</a>
-                <a href="index.html#components" class="text-sm font-medium hover:text-gray-300">Components</a>
-                <a href="index.html#workshop" class="text-sm font-medium hover:text-gray-300">Workshop</a>
-                <a href="articles.html" class="text-sm font-medium hover:text-gray-300">Articles</a>
-                <a href="cart.html" class="text-sm font-medium hover:text-gray-300">Cart</a>
+                <a href="landing-page.html" class="text-sm font-medium hover:text-gray-300">Home</a>
+                <a href="product-catalog.html" class="text-sm font-medium hover:text-gray-300">Products</a>
+                <a href="article-archieve.html" class="text-sm font-medium hover:text-gray-300">Article</a>
+                <a href="about-us.html" class="text-sm font-medium hover:text-gray-300">About</a>
             </nav>
         </div>
     </header>
@@ -164,7 +156,6 @@
                                     <label for="bank-transfer" class="ml-2 text-sm font-medium text-gray-300">Bank Transfer</label>
                                 </div>
                             </div>
-                            <!-- Credit Card Details -->
                             <div id="credit-card-details" class="mt-4 space-y-4">
                                 <div>
                                     <label for="card-number" class="block text-sm font-medium text-gray-300">Card Number</label>
@@ -188,26 +179,31 @@
                     </form>
                 </div>
                 <!-- Order Summary -->
-                <div class="lg:w-1/3 bg-darkgray rounded-lg p-6">
-                    <h3 class="text-xl font-semibold mb-6">Order Summary</h3>
-                    <div id="order-items" class="space-y-4">
-                        <!-- Populated by JavaScript -->
+                <div id="order-summary" class="lg:w-1/3 bg-darkgray rounded-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-6">Order Summary</h3>
+                        <div id="order-items" class="space-y-4">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        <div class="space-y-4 mt-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-medium">Subtotal</span>
+                                <span id="order-subtotal" class="text-lg font-medium">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-medium">Shipping (Estimated)</span>
+                                <span id="order-shipping" class="text-lg font-medium">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xl font-bold border-t border-gray-700 pt-4">
+                                <span>Total</span>
+                                <span id="order-total" class="text-xl font-bold">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex flex-col gap-4">
+                            <a href="product-catalog.html" class="px-6 py-3 bg-transparent border border-gray-700 text-white rounded-lg hover:bg-gray-700 text-center">Continue Shopping</a>
+                            <a href="cart.html" class="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 text-center">Edit Cart</a>
+                        </div>
                     </div>
-                    <div class="border-t border-gray-700 mt-6 pt-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium">Subtotal</span>
-                            <span id="order-subtotal" class="text-lg font-medium">$0.00</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium">Shipping (Estimated)</span>
-                            <span id="order-shipping" class="text-lg font-medium">$10.00</span>
-                        </div>
-                        <div class="flex justify-between items-center text-xl font-bold">
-                            <span>Total</span>
-                            <span id="order-total" class="text-xl font-bold">$10.00</span>
-                        </div>
-                    </div>
-                    <a href="cart.html" class="mt-6 inline-block text-gray-300 hover:text-white underline">Edit Cart</a>
                 </div>
             </div>
         </div>
@@ -215,167 +211,171 @@
 
     <!-- Footer -->
     <footer class="w-full bg-[#121212] text-[#f5f5f5] px-6 md:px-12 lg:px-16 py-10 border-t border-[#252525]">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
-            <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
-                <div class="mb-6 md:mb-0 md:mr-10">
-                    <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
+                <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
+                    <div class="mb-6 md:mb-0 md:mr-10">
+                        <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
+                        <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
+                            Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Latest Article</h3>
-                    <h2 class="text-xl font-medium mb-3 text-center md:text-left text-[#f5f5f5] tracking-tight">Ready to Ride?</h2>
-                    <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
-                        Discover the joy of cycling with Cycle. Explore our latest tips, gear reviews, and community stories to inspire your next adventure on two wheels.
-                    </p>
+                <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
+                    <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Navigation</h3>
+                            <a href="landing-page.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Home</a>
+                            <a href="product-catalog.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Products</a>
+                            <a href="article-archieve.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Articles</a>
+                            <a href="about-us.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">About</a>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
+                            <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
+                            <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
+                            <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
-                <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Products</h3>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Bicycles</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Accessories</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Clothing</a>
-                        <a href="#" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Components</a>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
-                        <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
-                        <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
-                        <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
-                    </div>
+            <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
+                <p class="text-center">© 2010 — 2025 Cycle</p>
+                <div class="flex space-x-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
+                    <span>—</span>
+                    <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
-            <p class="text-center">© 2010 — 2025 Cycle</p>
-            <div class="flex space-x-4 mt-2 md:mt-0">
-                <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
-                <span>—</span>
-                <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const checkoutForm = document.getElementById('checkout-form');
-            const creditCardDetails = document.getElementById('credit-card-details');
-            const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
-            const orderItemsContainer = document.getElementById('order-items');
-            const orderSubtotal = document.getElementById('order-subtotal');
-            const orderShipping = document.getElementById('order-shipping');
-            const orderTotal = document.getElementById('order-total');
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const checkoutForm = document.getElementById('checkout-form');
+        const creditCardDetails = document.getElementById('credit-card-details');
+        const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+        const orderItemsContainer = document.getElementById('order-items');
+        const orderSubtotal = document.getElementById('order-subtotal');
+        const orderShipping = document.getElementById('order-shipping');
+        const orderTotal = document.getElementById('order-total');
 
-            // Sample cart data (replace with real data from cart.html or localStorage)
-            const cart = [
-                {
-                    id: 1,
-                    name: 'Road Bike Pro',
-                    price: 1200.00,
-                    quantity: 1,
-                    image: 'https://images.unsplash.com/photo-1485965127658-0a7dd765f3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
-                    selected: true
-                },
-                {
-                    id: 2,
-                    name: 'Cycling Helmet',
-                    price: 80.00,
-                    quantity: 2,
-                    image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
-                    selected: true
-                }
-            ];
+        // Define cart data with only Road Bike Pro (1) and Safety Helmet Pro (2)
+        const cart = [
+            {
+                id: 1,
+                name: 'Road Bike Pro',
+                price: 1200.00,
+                quantity: 1,
+                image: 'https://images.unsplash.com/photo-1485965127658-0a7dd765f3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                selected: true
+            },
+            {
+                id: 2,
+                name: 'Safety Helmet Pro',
+                price: 80.00,
+                quantity: 2,
+                image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+                selected: true
+            }
+        ];
 
-            // Function to render order summary
-            function renderOrderSummary() {
-                orderItemsContainer.innerHTML = '';
-                const selectedItems = cart.filter(item => item.selected);
-                if (selectedItems.length === 0) {
-                    orderItemsContainer.innerHTML = '<p class="text-gray-400">No items selected.</p>';
-                    orderSubtotal.textContent = '$0.00';
-                    orderShipping.textContent = '$0.00';
-                    orderTotal.textContent = '$0.00';
-                    return;
-                }
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
 
-                selectedItems.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-center gap-4';
-                    itemElement.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h4 class="text-sm font-medium">${item.name}</h4>
-                            <p class="text-sm text-gray-400">$${item.price.toFixed(2)} x ${item.quantity}</p>
-                        </div>
-                        <p class="text-sm font-medium">$${(item.price * item.quantity).toFixed(2)}</p>
-                    `;
-                    orderItemsContainer.appendChild(itemElement);
-                });
-
-                const subtotal = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                const shipping = subtotal > 0 ? 10.00 : 0;
-                const total = subtotal + shipping;
-                orderSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-                orderShipping.textContent = `$${shipping.toFixed(2)}`;
-                orderTotal.textContent = `$${total.toFixed(2)}`;
+        // Function to render order summary
+        function renderOrderSummary() {
+            orderItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p class="text-gray-400 text-center">No items in cart.</p>';
+                orderSubtotal.textContent = '$0.00';
+                orderShipping.textContent = '$0.00';
+                orderTotal.textContent = '$0.00';
+                return;
             }
 
-            // Toggle credit card details based on payment method
-            paymentMethods.forEach(method => {
-                method.addEventListener('change', function() {
-                    if (this.value === 'credit-card') {
-                        creditCardDetails.classList.remove('hidden');
-                        creditCardDetails.querySelectorAll('input').forEach(input => input.required = true);
-                    } else {
-                        creditCardDetails.classList.add('hidden');
-                        creditCardDetails.querySelectorAll('input').forEach(input => input.required = false);
-                    }
-                });
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex items-center justify-between border-b border-gray-700 py-4';
+                itemElement.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg">
+                        <div>
+                            <h3 class="text-lg font-medium">${item.name}</h3>
+                            <p class="text-gray-400">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <p class="text-lg font-medium">$${(item.price * item.quantity).toFixed(2)}</p>
+                `;
+                orderItemsContainer.appendChild(itemElement);
             });
 
-            // Form submission with basic validation
-            checkoutForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const selectedItems = cart.filter(item => item.selected);
-                if (selectedItems.length === 0) {
-                    alert('Please select at least one item to proceed.');
-                    return;
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const shipping = subtotal > 0 ? 10.00 : 0;
+            const total = subtotal + shipping;
+            orderSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            orderShipping.textContent = `$${shipping.toFixed(2)}`;
+            orderTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Toggle credit card details based on payment method
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', function() {
+                if (this.value === 'credit-card') {
+                    creditCardDetails.classList.remove('hidden');
+                    creditCardDetails.querySelectorAll('input').forEach(input => input.required = true);
+                } else {
+                    creditCardDetails.classList.add('hidden');
+                    creditCardDetails.querySelectorAll('input').forEach(input => input.required = false);
                 }
-
-                const formData = new FormData(checkoutForm);
-                const fullName = formData.get('full-name');
-                const email = formData.get('email');
-                const address = formData.get('address');
-                const city = formData.get('city');
-                const postalCode = formData.get('postal-code');
-                const phone = formData.get('phone');
-                const paymentMethod = formData.get('payment-method');
-
-                // Basic email validation
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    alert('Please enter a valid email address.');
-                    return;
-                }
-
-                // Placeholder for payment processing
-                alert(`Order placed successfully!\n\nBilling: ${fullName}, ${email}, ${address}, ${city}, ${postalCode}, ${phone}\nPayment Method: ${paymentMethod}\nItems: ${selectedItems.length}\nTotal: $${orderTotal.textContent.slice(1)}`);
-                // In a real app, send data to a backend or payment gateway
             });
-
-            // Hamburger menu toggle
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            });
-
-            // Initial render
-            renderOrderSummary();
         });
-    </script>
+
+        // Form submission with basic validation
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items to proceed.');
+                return;
+            }
+
+            const formData = new FormData(checkoutForm);
+            const fullName = formData.get('full-name');
+            const email = formData.get('email');
+            const address = formData.get('address');
+            const city = formData.get('city');
+            const postalCode = formData.get('postal-code');
+            const phone = formData.get('phone');
+            const paymentMethod = formData.get('payment-method');
+
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Placeholder for payment processing
+            alert(`Order placed successfully!\n\nBilling: ${fullName}, ${email}, ${address}, ${city}, ${postalCode}, ${phone}\nPayment Method: ${paymentMethod}\nItems: ${cart.length}\nTotal: $${orderTotal.textContent.slice(1)}`);
+            // Clear cart after successful order
+            localStorage.removeItem('cart');
+            // In a real app, send data to a backend or payment gateway
+        });
+
+        // Hamburger menu toggle
+        hamburgerBtn.addEventListener('click', function() {
+            hamburgerBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Initial render
+        renderOrderSummary();
+    });
+</script>
 </body>
 </html>
