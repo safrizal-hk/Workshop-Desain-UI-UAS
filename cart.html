@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cycle | Cart</title>
-        <link rel="icon" type="image/png" href="image/logo.png">
-
+    <title>Cycle | Shopping Cart</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
+                    colors: {   
                         dark: '#121212',
                         darkgray: '#1a1a1a',
                         lightgray: '#f5f5f5',
@@ -33,6 +32,18 @@
             color: #f5f5f5;
             font-family: 'Inter', sans-serif;
         }
+        /* Mobile menu animations */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .mobile-menu.open {
+            max-height: 500px; /* Disesuaikan agar muat */
+            opacity: 1;
+        }
+        /* Hamburger icon animation */
         .hamburger-line {
             display: block;
             width: 24px;
@@ -50,28 +61,48 @@
         .hamburger.open .line3 {
             transform: translateY(-7px) rotate(-45deg);
         }
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-            opacity: 0;
+        /* Responsive badge styling */
+        .badge {
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            padding: 0.25rem 0.5rem;
         }
-        .mobile-menu.open {
-            max-height: 300px;
-            opacity: 1;
+        /* Dropdown menu styling */
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #1a1a1a;
+            border: 1px solid #374151;
+            border-radius: 0.375rem;
+            min-width: 150px;
+            z-index: 50;
         }
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .profile-dropdown.open {
+            display: block;
         }
-        .quantity-input {
-            -moz-appearance: textfield;
+        @media (max-width: 640px) {
+            .navbar-container {
+                flex-wrap: wrap;
+            }
+            .desktop-nav {
+                display: none;
+            }
+            .mobile-menu {
+                width: 100%;
+            }
+        }
+        .disabled-btn { 
+            background-color: #2a2a2a; 
+            color: #555; 
+            cursor: not-allowed; 
+        }
+        .disabled-btn:hover { 
+            background-color: #2a2a2a; 
         }
     </style>
 </head>
 <body>
-    <body>
     <header class="border-b border-gray-700 px-4 sm:px-6 lg:px-10 py-3 sticky top-0 bg-dark z-50">
         <div class="max-w-7xl mx-auto flex items-center justify-between navbar-container">
             <div class="flex items-center gap-3 sm:gap-4">
@@ -83,27 +114,48 @@
                 </svg>
                 <h2 class="text-lg sm:text-xl font-bold text-lightgray">Cycle</h2>
             </div>
-            <!-- Desktop Navigation -->
-            <div class="flex items-center gap-4 sm:gap-6 desktop-nav">
+            
+            <div class="flex items-center gap-4 sm:gap-6">
                 <nav class="hidden md:flex items-center gap-4 lg:gap-6">
                     <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
                     <a href="product-catalog.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Products</a>
                     <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
                     <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
                     <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                        Cart <span class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
+                        Cart <span id="cart-badge" class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">0</span>
                     </a>
-                    <a href="login.html" class="text-sm font-medium text-dark bg-lightgray hover:bg-gray-200 px-3 sm:px-4 py-2 rounded-md transition">Login</a>
                 </nav>
+
+                <div class="relative">  
+                    <button id="profile-btn" class="flex items-center focus:outline-none">
+                        <div class="w-10 h-10 rounded-full bg-[#252525] flex items-center justify-center text-[#f5f5f5] hover:bg-[#303030] transition-colors">
+                            <span class="text-lg font-medium">A</span>
+                        </div>
+                    </button>
+                    <div id="profile-dropdown" class="profile-dropdown">
+                        <div class="p-4 border-b border-[#252525]">
+                            <p class="text-[#f5f5f5] font-medium">Admin User</p>
+                            <p class="text-sm text-[#A0A0A0]">admin@cycle.com</p>
+                        </div>
+                        <div class="py-2">
+                            <a href="profile-settings.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Profile Settings
+                            </a>
+                            <a href="login.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+                    <span class="hamburger-line line1"></span>
+                    <span class="hamburger-line line2"></span>
+                    <span class="hamburger-line line3"></span>
+                </button>
             </div>
-            <!-- Hamburger Button -->
-            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
-                <span class="hamburger-line line1"></span>
-                <span class="hamburger-line line2"></span>
-                <span class="hamburger-line line3"></span>
-            </button>
         </div>
-        <!-- Mobile Menu -->
+
         <div id="mobile-menu" class="md:hidden bg-dark border-b border-gray-700 mobile-menu">
             <nav class="flex flex-col items-center py-4 space-y-4">
                 <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
@@ -111,231 +163,226 @@
                 <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
                 <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
                 <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                    Cart <span class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
+                    Cart <span id="mobile-cart-badge" class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">0</span>
                 </a>
-                <a href="login.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Login</a>
             </nav>
         </div>
     </header>
 
-    <!-- Cart Section -->
-    <section id="cart" class="py-12 bg-dark">
+    <section id="cart-page" class="py-12 bg-dark">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8">Your Cart</h2>
-            <div id="cart-content" class="flex flex-col lg:flex-row gap-8">
-                <!-- Product List -->
-                <div id="cart-items-container" class="lg:w-2/3 bg-darkgray rounded-lg overflow-hidden">
-                    <div class="p-6">
-                        <div id="cart-items" class="space-y-6">
-                            <!-- Cart Item Template (Populated by JavaScript) -->
-                        </div>
-                        <div id="cart-empty" class="text-center text-gray-400 py-12 hidden">
-                            <p class="text-lg">Your cart is empty.</p>
-                            <a href="index.html" class="text-gray-300 hover:text-white underline mt-4 inline-block">Continue Shopping</a>
-                        </div>
+            <h2 class="text-3xl font-bold mb-8">Shopping Cart</h2>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-2/3">
+                    <div id="cart-actions-card" class="bg-darkgray rounded-lg p-4 flex justify-between items-center mb-4">
+                        <label for="select-all" class="flex items-center space-x-3 text-sm cursor-pointer">
+                            <input type="checkbox" id="select-all" class="h-5 w-5 bg-darkgray border-gray-600 rounded text-gray-400 focus:ring-0">
+                            <span>Select All</span>
+                        </label>
+                        <button id="delete-selected-btn" class="text-sm text-red-500 hover:text-red-400 font-medium">Delete Selected</button>
+                    </div>
+
+                    <div id="cart-items-container" class="space-y-4">
+                    </div>
+
+                    <div id="empty-cart-view" class="text-center py-16 bg-darkgray rounded-lg">
+                        <svg class="mx-auto h-24 w-24 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        <h3 class="mt-4 text-2xl font-semibold text-lightgray">Your cart is empty</h3>
+                        <p class="mt-2 text-gray-400">Looks like you haven't added anything to your cart yet.</p>
+                        <a href="product-catalog.html" class="mt-6 inline-block bg-white text-dark font-medium py-2 px-5 rounded-lg hover:bg-gray-200 transition">
+                            Start Shopping
+                        </a>
                     </div>
                 </div>
-                <!-- Summary Section -->
-                <div id="cart-summary" class="lg:w-1/3 bg-darkgray rounded-lg overflow-hidden">
-                    <div class="p-6">
+
+                <div class="lg:w-1/3 self-start lg:sticky lg:top-28">
+                    <div class="bg-darkgray p-6 rounded-lg">
                         <h3 class="text-xl font-semibold mb-6">Order Summary</h3>
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-medium">Subtotal</span>
-                                <span id="cart-subtotal" class="text-lg font-medium">$0.00</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-lg font-medium">Shipping (Estimated)</span>
-                                <span class="text-lg font-medium">$10.00</span>
-                            </div>
-                            <div class="flex justify-between items-center text-xl font-bold border-t border-gray-700 pt-4">
-                                <span>Total</span>
-                                <span id="cart-total" class="text-xl font-bold">$10.00</span>
-                            </div>
+                            <div class="flex justify-between"><span>Subtotal</span><span id="subtotal">Rp 0</span></div>
+                            <div class="flex justify-between"><span>Shipping</span><span id="shipping">Rp 0</span></div>
+                            <div class="border-t border-gray-700 my-4"></div>
+                            <div class="flex justify-between text-xl font-bold"><span>Total</span><span id="total">Rp 0</span></div>
                         </div>
-                        <div class="mt-8 flex flex-col gap-4">
-                            <a href="product-catalog.html" class="px-6 py-3 bg-transparent border border-gray-700 text-white rounded-lg hover:bg-gray-700 text-center">Back to Shopping</a>
-                            <button id="checkout-btn" class="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed" disabled>Proceed to Checkout</button>
-                        </div>
+                        <a id="checkout-btn" href="payment.html" class="block w-full text-center mt-6 bg-white text-dark font-medium py-3 px-6 rounded-lg hover:bg-gray-200 transition">
+                            Proceed to Checkout
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="w-full bg-[#121212] text-[#f5f5f5] px-6 md:px-12 lg:px-16 py-10 border-t border-[#252525]">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
-            <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
-                <div class="mb-6 md:mb-0 md:mr-10">
-                    <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
-                    <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
-                        Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
-                    </p>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
-                <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Navigation</h3>
-                        <a href="landing-page.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Home</a>
-                        <a href="product-catalog.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Products</a>
-                        <a href="article-archieve.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Articles</a>
-                        <a href="about-us.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">About</a>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
-                        <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
-                        <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
-                        <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
-            <p class="text-center">© 2010 — 2025 Cycle</p>
-            <div class="flex space-x-4 mt-2 md:mt-0">
-                <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
-                <span>—</span>
-                <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
-            </div>
-        </div>
-    </div>
-</footer>
+        </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const cartItemsContainer = document.getElementById('cart-items');
-            const cartEmpty = document.getElementById('cart-empty');
-            const cartSubtotal = document.getElementById('cart-subtotal');
-            const cartTotal = document.getElementById('cart-total');
-            const checkoutBtn = document.getElementById('checkout-btn');
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- SCRIPT NAVBAR (dari index.html) ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        hamburgerBtn.addEventListener('click', function() {
+            hamburgerBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
 
-            // Sample cart data (replace with real data from a backend or localStorage)
-            let cart = [
-                {
-                    id: 1,
-                    name: 'Road Bike Pro',
-                    price: 1200.00,
-                    quantity: 1,
-                    image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
-                    selected: true
-                },
-                // {
-                //     id: 2,
-                //     name: 'Cycling Helmet',
-                //     price: 80.00,
-                //     quantity: 2,
-                //     image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
-                //     selected: true
-                // }
-            ];
+        profileBtn.addEventListener('click', function() {
+            profileDropdown.classList.toggle('open');
+        });
 
-            // Function to render cart items
-            function renderCart() {
-                cartItemsContainer.innerHTML = '';
-                if (cart.length === 0) {
-                    cartEmpty.classList.remove('hidden');
-                    cartItemsContainer.classList.add('hidden');
-                    cartSubtotal.textContent = '$0.00';
-                    cartTotal.textContent = '$0.00';
-                    checkoutBtn.disabled = true;
-                    return;
-                }
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                profileDropdown.classList.remove('open');
+            }
+        });
 
-                cartEmpty.classList.add('hidden');
+        // --- SCRIPT CART (dari cart.html) ---
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const selectAllCheckbox = document.getElementById('select-all');
+        const deleteSelectedBtn = document.getElementById('delete-selected-btn');
+        const subtotalEl = document.getElementById('subtotal');
+        const shippingEl = document.getElementById('shipping');
+        const totalEl = document.getElementById('total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const cartActionsCard = document.getElementById('cart-actions-card');
+        const emptyCartView = document.getElementById('empty-cart-view');
+        const cartBadge = document.getElementById('cart-badge');
+        const mobileCartBadge = document.getElementById('mobile-cart-badge');
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            updateCartBadge(cart);
+
+            if (cart.length === 0) {
+                cartActionsCard.classList.add('hidden');
+                cartItemsContainer.classList.add('hidden');
+                emptyCartView.classList.remove('hidden');
+            } else {
+                cartActionsCard.classList.remove('hidden');
                 cartItemsContainer.classList.remove('hidden');
-
+                cartItemsContainer.innerHTML = '';
+                emptyCartView.classList.add('hidden');
+                
                 cart.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-center justify-between border-b border-gray-700 py-4';
-                    itemElement.innerHTML = `
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" data-id="${item.id}" class="select-item h-5 w-5 text-gray-700 bg-darkgray border-gray-700 rounded focus:ring-0" ${item.selected ? 'checked' : ''}>
-                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg">
-                            <div>
-                                <h3 class="text-lg font-medium">${item.name}</h3>
-                                <p class="text-gray-400">$${item.price.toFixed(2)}</p>
+                    const itemHtml = `
+                        <div class="bg-darkgray rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-id="${item.id}">
+                            <div class="flex items-center gap-4 w-full sm:w-auto">
+                                <input type="checkbox" class="item-checkbox h-5 w-5 bg-darkgray border-gray-600 rounded text-gray-400 focus:ring-0 cursor-pointer" ${item.selected ? 'checked' : ''}>
+                                <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold">${item.name}</h3>
+                                    <p class="text-sm text-gray-400">${formatRupiah(item.price)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 self-end sm:self-center">
+                                <div class="flex items-center border border-gray-700 rounded-md">
+                                    <button class="quantity-change px-3 py-1 text-lg" data-action="decrease">-</button>
+                                    <span class="quantity px-3">${item.quantity}</span>
+                                    <button class="quantity-change px-3 py-1 text-lg" data-action="increase">+</button>
+                                </div>
+                                <button class="remove-item text-gray-500 hover:text-red-500 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="quantity-input w-16 bg-darkgray border border-gray-700 rounded-lg p-2 text-white text-center">
-                            <button data-id="${item.id}" class="remove-btn text-gray-400 hover:text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
                     `;
-                    cartItemsContainer.appendChild(itemElement);
+                    cartItemsContainer.insertAdjacentHTML('beforeend', itemHtml);
                 });
-
-                updateCartTotals();
             }
+            updateOrderSummary(cart);
+        }
 
-            // Function to update cart totals
-            function updateCartTotals() {
-                const subtotal = cart.reduce((sum, item) => sum + (item.selected ? item.price * item.quantity : 0), 0);
-                const shipping = subtotal > 0 ? 10.00 : 0; // Shipping only if subtotal > 0
-                const total = subtotal + shipping;
-                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-                cartTotal.textContent = `$${total.toFixed(2)}`;
-                checkoutBtn.disabled = subtotal === 0;
+        function updateOrderSummary(cart) {
+            const selectedItems = cart.filter(item => item.selected);
+            
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const shipping = subtotal > 0 ? 50000 : 0;
+            const total = subtotal + shipping;
+
+            subtotalEl.textContent = formatRupiah(subtotal);
+            shippingEl.textContent = formatRupiah(shipping);
+            totalEl.textContent = formatRupiah(total);
+
+            selectAllCheckbox.checked = cart.length > 0 && cart.every(item => item.selected);
+
+            if (selectedItems.length === 0) {
+                checkoutBtn.classList.add('disabled-btn');
+                checkoutBtn.setAttribute('aria-disabled', 'true');
+                checkoutBtn.onclick = (e) => e.preventDefault();
+            } else {
+                checkoutBtn.classList.remove('disabled-btn');
+                checkoutBtn.removeAttribute('aria-disabled');
+                checkoutBtn.onclick = null;
             }
+        }
+        
+        function updateCartBadge(cart) {
+             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+             // Periksa jika elemen ada sebelum mengatur textContent
+             if (cartBadge) cartBadge.textContent = totalItems;
+             if (mobileCartBadge) mobileCartBadge.textContent = totalItems;
+        }
 
-            // Event delegation for quantity changes, remove buttons, and checkboxes
-            cartItemsContainer.addEventListener('input', function(e) {
-                if (e.target.classList.contains('quantity-input')) {
-                    const id = parseInt(e.target.dataset.id);
-                    const quantity = parseInt(e.target.value);
-                    if (quantity >= 1) {
-                        const item = cart.find(item => item.id === id);
-                        item.quantity = quantity;
-                        updateCartTotals();
+        function handleCartAction(e) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemElement = e.target.closest('[data-id]');
+            if (!itemElement) return;
+            
+            const itemId = parseInt(itemElement.dataset.id);
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            if (itemIndex === -1) return;
+
+            if (e.target.closest('.quantity-change')) {
+                const action = e.target.closest('.quantity-change').dataset.action;
+                if (action === 'increase') {
+                    cart[itemIndex].quantity++;
+                } else if (action === 'decrease') {
+                    if (cart[itemIndex].quantity > 1) {
+                        cart[itemIndex].quantity--;
+                    } else {
+                        cart.splice(itemIndex, 1);
                     }
                 }
-            });
+            } else if (e.target.closest('.remove-item')) {
+                cart.splice(itemIndex, 1);
+            } else if (e.target.matches('.item-checkbox')) {
+                cart[itemIndex].selected = e.target.checked;
+            }
 
-            cartItemsContainer.addEventListener('click', function(e) {
-                if (e.target.closest('.remove-btn')) {
-                    const id = parseInt(e.target.closest('.remove-btn').dataset.id);
-                    cart = cart.filter(item => item.id !== id);
-                    renderCart();
-                }
-            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
 
-            cartItemsContainer.addEventListener('change', function(e) {
-                if (e.target.classList.contains('select-item')) {
-                    const id = parseInt(e.target.dataset.id);
-                    const item = cart.find(item => item.id === id);
-                    item.selected = e.target.checked;
-                    updateCartTotals();
-                }
-            });
+        cartItemsContainer.addEventListener('click', handleCartAction);
 
-            // Checkout button redirect
-            checkoutBtn.addEventListener('click', function() {
-                const selectedItems = cart.filter(item => item.selected);
-                if (selectedItems.length > 0) {
-                    window.location.href = 'payment.html'; // Redirect to checkout.html
-                }
-            });
-
-            // Hamburger menu toggle
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            });
-
-            // Initial render
+        selectAllCheckbox.addEventListener('change', (e) => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.forEach(item => item.selected = e.target.checked);
+            localStorage.setItem('cart', JSON.stringify(cart));
             renderCart();
         });
+
+        deleteSelectedBtn.addEventListener('click', () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const remainingItems = cart.filter(item => !item.selected);
+            localStorage.setItem('cart', JSON.stringify(remainingItems));
+            renderCart();
+        });
+
+        renderCart();
+    });
     </script>
 </body>
 </html>

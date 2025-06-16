@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle | Road Bike Pro</title>
-        <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="icon" type="image/png" href="image/logo.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,48 +25,29 @@
         }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: #121212;
-            color: #f5f5f5;
-            font-family: 'Inter', sans-serif;
-        }
-        .hamburger-line {
-            display: block;
-            width: 24px;
-            height: 2px;
-            margin: 5px auto;
-            background-color: #f5f5f5;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger.open .line1 {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .hamburger.open .line2 {
-            opacity: 0;
-        }
-        .hamburger.open .line3 {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        .mobile-menu.open {
-            max-height: 300px;
-            opacity: 1;
-        }
-        .star-rating {
-            color: #FFD700; /* Gold for stars */
-        }
+        html { scroll-behavior: smooth; }
+        body { background-color: #121212; color: #f5f5f5; font-family: 'Inter', sans-serif; }
+        
+        /* Navbar & Dropdown Styles */
+        .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out; opacity: 0; }
+        .mobile-menu.open { max-height: 500px; opacity: 1; }
+        .hamburger-line { display: block; width: 24px; height: 2px; margin: 5px auto; background-color: #f5f5f5; transition: all 0.3s ease-in-out; }
+        .hamburger.open .line1 { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open .line2 { opacity: 0; }
+        .hamburger.open .line3 { transform: translateY(-7px) rotate(-45deg); }
+        .profile-dropdown { display: none; position: absolute; top: 100%; right: 0; background-color: #1a1a1a; border: 1px solid #374151; border-radius: 0.375rem; min-width: 150px; z-index: 50; }
+        .profile-dropdown.open { display: block; }
+        .badge { font-size: clamp(0.65rem, 2vw, 0.75rem); padding: 0.25rem 0.5rem; }
+
+
+        /* Product Detail Specific Styles */
+        .star-rating { color: #FFD700; }
+        .tab-btn.active { border-bottom: 2px solid #f5f5f5; color: #f5f5f5; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
     </style>
 </head>
 <body>
-    <body>
     <header class="border-b border-gray-700 px-4 sm:px-6 lg:px-10 py-3 sticky top-0 bg-dark z-50">
         <div class="max-w-7xl mx-auto flex items-center justify-between navbar-container">
             <div class="flex items-center gap-3 sm:gap-4">
@@ -78,27 +59,48 @@
                 </svg>
                 <h2 class="text-lg sm:text-xl font-bold text-lightgray">Cycle</h2>
             </div>
-            <!-- Desktop Navigation -->
-            <div class="flex items-center gap-4 sm:gap-6 desktop-nav">
+            
+            <div class="flex items-center gap-4 sm:gap-6">
                 <nav class="hidden md:flex items-center gap-4 lg:gap-6">
                     <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
                     <a href="product-catalog.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Products</a>
                     <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
                     <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
                     <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                        Cart <span class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
+                        Cart <span id="cart-badge" class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">0</span>
                     </a>
-                    <a href="login.html" class="text-sm font-medium text-dark bg-lightgray hover:bg-gray-200 px-3 sm:px-4 py-2 rounded-md transition">Login</a>
                 </nav>
+
+                <div class="relative">  
+                    <button id="profile-btn" class="flex items-center focus:outline-none">
+                        <div class="w-10 h-10 rounded-full bg-[#252525] flex items-center justify-center text-[#f5f5f5] hover:bg-[#303030] transition-colors">
+                            <span class="text-lg font-medium">A</span>
+                        </div>
+                    </button>
+                    <div id="profile-dropdown" class="profile-dropdown">
+                        <div class="p-4 border-b border-[#252525]">
+                            <p class="text-[#f5f5f5] font-medium">Admin User</p>
+                            <p class="text-sm text-[#A0A0A0]">admin@cycle.com</p>
+                        </div>
+                        <div class="py-2">
+                            <a href="profile-settings.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Profile Settings
+                            </a>
+                            <a href="login.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
+                    <span class="hamburger-line line1"></span>
+                    <span class="hamburger-line line2"></span>
+                    <span class="hamburger-line line3"></span>
+                </button>
             </div>
-            <!-- Hamburger Button -->
-            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
-                <span class="hamburger-line line1"></span>
-                <span class="hamburger-line line2"></span>
-                <span class="hamburger-line line3"></span>
-            </button>
         </div>
-        <!-- Mobile Menu -->
+
         <div id="mobile-menu" class="md:hidden bg-dark border-b border-gray-700 mobile-menu">
             <nav class="flex flex-col items-center py-4 space-y-4">
                 <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
@@ -106,48 +108,61 @@
                 <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
                 <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
                 <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                    Cart <span class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
+                    Cart <span id="mobile-cart-badge" class="badge inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">0</span>
                 </a>
-                <a href="login.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Login</a>
             </nav>
         </div>
     </header>
 
-    <!-- Product Detail Section -->
     <section id="product-detail" class="py-12 bg-dark">
         <div class="max-w-7xl mx-auto px-4">
             <a href="product-catalog.html" class="text-gray-400 hover:text-white mb-6 inline-block">← Back to Catalog</a>
-            <!-- Product Card -->
             <div class="bg-darkgray rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row">
                     <div class="md:w-1/3 p-4">
-                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Road Bike Pro" class="w-full h-64 md:h-full object-cover rounded-lg">
+                        <img id="product-image" src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Road Bike Pro" class="w-full h-64 md:h-full object-cover rounded-lg">
                     </div>
-                    <div class="p-8 md:w-2/3">
-                        <h2 class="text-3xl font-bold mb-2">Road Bike Pro</h2>
-                        <p class="text-2xl font-semibold text-lightgray mb-6">$1,200</p>
-                        <div class="prose prose-invert max-w-none">
-                            <h3 class="text-gray-500 text-sm mb-4">Description</h3>
-                            <p>The Road Bike Pro is designed for speed and efficiency on paved roads. With a lightweight carbon frame and aerodynamic design, this bike is perfect for competitive cyclists and enthusiasts alike.</p>
-                            <h3>Specifications</h3>
-                            <ul>
-                                <li>Frame: Carbon Fiber</li>
-                                <li>Weight: 8.5 kg</li>
-                                <li>Gears: 22-speed Shimano Ultegra</li>
-                                <li>Tires: 700c x 25mm</li>
-                            </ul>
+                    <div class="p-8 md:w-2/3 flex flex-col">
+                        <h2 id="product-name" class="text-3xl font-bold mb-2">Road Bike Pro</h2>
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="star-rating">★★★★★</div>
+                            <span class="text-gray-400 text-sm">(3 Reviews)</span>
                         </div>
-                        <button id="add-to-cart" class="mt-6 bg-white text-dark font-medium py-2 px-4 rounded-lg hover:bg-gray-200 transition">Add to Cart</button>
+                        <p id="product-price" class="text-2xl font-semibold text-lightgray mb-6">Rp 18.000.000</p>
+                        <p class="text-gray-300 mb-6">The Road Bike Pro is designed for speed and efficiency. With a lightweight carbon frame and aerodynamic design, this bike is perfect for competitive cyclists.</p>
+                        <div class="flex-grow"></div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <button id="add-to-cart-btn" class="bg-white text-dark font-medium py-3 px-6 rounded-lg hover:bg-gray-200 transition flex-grow sm:flex-grow-0">Add to Cart</button>
+                            <button id="buy-now-btn" class="bg-gray-700 text-white font-medium py-3 px-6 rounded-lg hover:bg-gray-600 transition flex-grow sm:flex-grow-0">Buy Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Review Card -->
+
             <div class="bg-darkgray rounded-lg mt-8">
+                <div class="border-b border-gray-700">
+                    <nav class="flex space-x-8 px-8 -mb-px">
+                        <button data-tab="description" class="tab-btn active text-gray-400 hover:text-white py-4 px-1 text-sm font-medium">Description</button>
+                        <button data-tab="specifications" class="tab-btn text-gray-400 hover:text-white py-4 px-1 text-sm font-medium">Specifications</button>
+                        <button data-tab="reviews" class="tab-btn text-gray-400 hover:text-white py-4 px-1 text-sm font-medium">Reviews</button>
+                    </nav>
+                </div>
                 <div class="p-8">
-                    <h2 class="text-3xl font-bold mb-8">Customer Reviews</h2>
-                    <div class="space-y-4">
-                        <!-- Review 1 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
+                    <div id="description" class="tab-panel active prose prose-invert max-w-none">
+                        <p>The Road Bike Pro is designed for speed and efficiency on paved roads. With a lightweight carbon frame and aerodynamic design, this bike is perfect for competitive cyclists and enthusiasts alike. It features top-of-the-line components to ensure a smooth, fast, and reliable ride every time. Whether you're climbing hills or sprinting on flats, the Road Bike Pro delivers unparalleled performance.</p>
+                    </div>
+                    <div id="specifications" class="tab-panel prose prose-invert max-w-none">
+                        <ul>
+                            <li>Frame: Carbon Fiber</li>
+                            <li>Weight: 8.5 kg</li>
+                            <li>Gears: 22-speed Shimano Ultegra</li>
+                            <li>Tires: 700c x 25mm</li>
+                            <li>Brakes: Shimano Ultegra Hydraulic Disc</li>
+                            <li>Saddle: Pro Performance Saddle</li>
+                        </ul>
+                    </div>
+                    <div id="reviews" class="tab-panel space-y-4">
+                        <div class="bg-[#121212] p-4 rounded-lg">
                             <div class="flex items-center mb-2">
                                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="John Doe" class="w-12 h-12 rounded-full object-cover mr-4">
                                 <div>
@@ -157,8 +172,7 @@
                             </div>
                             <p class="text-gray-400 text-sm">"This bike is a game-changer! Super lightweight and smooth on the road. Perfect for my daily commutes and weekend races."</p>
                         </div>
-                        <!-- Review 2 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
+                        <div class="bg-[#121212] p-4 rounded-lg">
                             <div class="flex items-center mb-2">
                                 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Sarah Miller" class="w-12 h-12 rounded-full object-cover mr-4">
                                 <div>
@@ -168,8 +182,7 @@
                             </div>
                             <p class="text-gray-400 text-sm">"Great bike for the price. The carbon frame is sturdy, but I wish the tires were a bit more durable for rougher terrains."</p>
                         </div>
-                        <!-- Review 3 -->
-                        <div class="bg-[#1a1a1a] p-4 rounded-lg">
+                        <div class="bg-[#121212] p-4 rounded-lg">
                             <div class="flex items-center mb-2">
                                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Mike Johnson" class="w-12 h-12 rounded-full object-cover mr-4">
                                 <div>
@@ -185,75 +198,100 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="w-full bg-[#121212] text-[#f5f5f5] px-6 md:px-12 lg:px-16 py-10 border-t border-[#252525]">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
-                <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
-                    <div class="mb-6 md:mb-0 md:mr-10">
-                        <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
-                        <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-tight">
-                            Jl. Airlangga No.4-6-8, Airlangga, Kec. Gubeng, Kota Surabaya, Jawa Timur 60115
-                        </p>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
-                    <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
-                        <div class="flex flex-col space-y-2">
-                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-tight">Navigation</h3>
-                            <a href="landing-page.html" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Home</a>
-                            <a href="product-catalog.html" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Products</a>
-                            <a href="article-archieve.html" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Articles</a>
-                            <a href="about-us.html" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">About</a>
-                        </div>
-                        <div class="flex flex-col space-y-2">
-                            <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-tight">Connect</h3>
-                            <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Instagram</a>
-                            <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Twitter</a>
-                            <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-tight hover:text-[#f5f5f5] hover:underline">Facebook</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-tight">
-                <p class="text-center">© 2010 — 2025 Cycle</p>
-                <div class="flex space-x-4 mt-2 md:mt-0">
-                    <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
-                    <span>—</span>
-                    <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
-                </div>
-            </div>
-        </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const addToCartBtn = document.getElementById('add-to-cart');
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- NAVBAR & DROPDOWN SCRIPT ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const profileBtn = document.getElementById('profile-btn');
+        const profileDropdown = document.getElementById('profile-dropdown');
 
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            });
+        hamburgerBtn.addEventListener('click', function() {
+            hamburgerBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
 
-            // Add to Cart functionality
-            addToCartBtn.addEventListener('click', function() {
-                // Store product data in sessionStorage
-                const product = {
-                    id: '1',
-                    name: 'Road Bike Pro',
-                    price: '$1,200',
-                    image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                };
-                sessionStorage.setItem('cartProduct', JSON.stringify(product));
-                // Redirect to cart page
-                window.location.href = 'cart.html';
+        profileBtn.addEventListener('click', function() {
+            profileDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                profileDropdown.classList.remove('open');
+            }
+        });
+
+        // --- PRODUCT DETAIL PAGE SCRIPT ---
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const buyNowBtn = document.getElementById('buy-now-btn');
+        const cartBadge = document.getElementById('cart-badge');
+        const mobileCartBadge = document.getElementById('mobile-cart-badge');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        const product = {
+            id: 1, // Sebaiknya sesuaikan dengan ID produk dari URL atau data
+            name: 'Road Bike Pro',
+            price: 18000000,
+            quantity: 1,
+            image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+            selected: true
+        };
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (cartBadge) cartBadge.textContent = totalItems;
+            if (mobileCartBadge) mobileCartBadge.textContent = totalItems;
+        }
+
+        addToCartBtn.addEventListener('click', function() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+            if (existingProductIndex > -1) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            addToCartBtn.textContent = 'Added to Cart!';
+            addToCartBtn.classList.remove('bg-white', 'text-dark');
+            addToCartBtn.classList.add('bg-green-600', 'text-white');
+            setTimeout(() => {
+                addToCartBtn.textContent = 'Add to Cart';
+                addToCartBtn.classList.add('bg-white', 'text-dark');
+                addToCartBtn.classList.remove('bg-green-600', 'text-white');
+            }, 2000);
+        });
+
+        buyNowBtn.addEventListener('click', function() {
+            localStorage.setItem('buyNowItem', JSON.stringify([product]));
+            window.location.href = 'payment.html';
+        });
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                tabPanels.forEach(panel => {
+                    panel.classList.remove('active');
+                    if (panel.id === button.dataset.tab) {
+                        panel.classList.add('active');
+                    }
+                });
             });
         });
+
+        // --- INITIALIZATION ---
+        updateCartBadge();
+    });
     </script>
 </body>
 </html>

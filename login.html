@@ -14,7 +14,9 @@
                     colors: {
                         dark: '#121212',
                         darkgray: '#1a1a1a',
-                        lightgray: '#f5f5f5',
+                        'brand-google': '#FFFFFF',
+                        'brand-facebook': '#1877F2',
+                        'brand-apple': '#000000',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -24,146 +26,138 @@
         }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: #121212;
-            color: #f5f5f5;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Mobile menu animations */
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        .mobile-menu.open {
-            max-height: 500px;
-            opacity: 1;
-        }
-        /* Hamburger icon animation */
-        .hamburger-line {
-            display: block;
-            width: 24px;
-            height: 2px;
-            margin: 5px auto;
-            background-color: #f5f5f5;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger.open .line1 {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .hamburger.open .line2 {
-            opacity: 0;
-        }
-        .hamburger.open .line3 {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-        @media (max-width: 640px) {
-            .navbar-container {
-                flex-wrap: wrap;
-            }
-            .desktop-nav {
-                display: none;
-            }
-            .mobile-menu {
-                width: 100%;
-            }
-        }
+        body { background-color: #121212; color: #f5f5f5; font-family: 'Inter', sans-serif; }
+        .tab-btn { cursor: pointer; padding: 10px 20px; border-bottom: 2px solid transparent; transition: all 0.3s ease; color: #a0a0a0; }
+        .tab-btn.active { color: #f5f5f5; border-bottom-color: #f5f5f5; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
-    <header class="border-b border-gray-700 px-4 sm:px-6 lg:px-10 py-3 fixed top-0 w-full bg-dark z-50">
-        <div class="max-w-7xl mx-auto flex items-center justify-between navbar-container">
-            <div class="flex items-center gap-3 sm:gap-4">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_6_319)">
-                        <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
-                    </g>
-                    <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
-                </svg>
-                <h2 class="text-lg sm:text-xl font-bold text-lightgray">Cycle</h2>
-            </div>
-            <div class="flex items-center gap-4 sm:gap-6 desktop-nav">
-                <nav class="hidden md:flex items-center gap-4 lg:gap-6">
-                    <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
-                    <a href="product-catalog.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Products</a>
-                    <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
-                    <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
-                    <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                        Cart <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
-                    </a>
-                    <a href="login.html" class="text-sm font-medium text-dark bg-lightgray hover:bg-gray-200 px-3 sm:px-4 py-2 rounded-md transition">Login</a>
-                </nav>
-            </div>
-            <button id="hamburger-btn" class="md:hidden hamburger focus:outline-none" aria-label="Toggle menu">
-                <span class="hamburger-line line1"></span>
-                <span class="hamburger-line line2"></span>
-                <span class="hamburger-line line3"></span>
-            </button>
-        </div>
-        <div id="mobile-menu" class="md:hidden bg-dark border-b border-gray-700 mobile-menu">
-            <nav class="flex flex-col items-center py-4 space-y-4">
-                <a href="index.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Home</a>
-                <a href="product-catalog.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Products</a>
-                <a href="article-archieve.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Articles</a>
-                <a href="about-us.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">About</a>
-                <a href="cart.html" class="text-sm font-medium text-lightgray hover:text-gray-300 flex items-center gap-2 transition">
-                    Cart <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-semibold text-white bg-red-600 rounded-full">3</span>
-                </a>
-                <a href="login.html" class="text-sm font-medium text-lightgray hover:text-gray-300 transition">Login</a>
-            </nav>
-        </div>
-    </header>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-    <section class="flex flex-col items-center justify-center min-h-screen bg-dark py-12 sm:py-16">
-        <div class="max-w-md w-full px-4 sm:px-6 lg:px-8">
-            <div class="bg-darkgray p-6 sm:p-8 rounded-lg border border-gray-800 flex flex-col items-center">
-                <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_319)">
-                            <path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
-                        </g>
-                        <defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs>
-                    </svg>
-                    <!-- <h2 class="text-2xl sm:text-3xl font-bold text-lightgray">Cycle</h2> -->
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <a href="index.html" class="inline-flex items-center gap-3">
+                <svg class="w-10 h-10 text-white" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_6_319)"><path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path></g><defs><clipPath id="clip0_6_319"><rect width="48" height="48" fill="white"></rect></clipPath></defs></svg>
+                <h1 class="text-3xl font-bold text-white">Cycle</h1>
+            </a>
+        </div>
+
+        <div class="bg-darkgray p-8 rounded-xl border border-gray-800">
+            <div class="flex border-b border-gray-700 mb-6">
+                <button id="login-tab-btn" class="tab-btn active flex-1 font-semibold">Login</button>
+                <button id="register-tab-btn" class="tab-btn flex-1 font-semibold">Register</button>
+            </div>
+
+            <div id="login-panel" class="tab-panel active">
+                <h2 class="text-2xl font-bold text-center mb-6">Welcome Back!</h2>
+                <div class="space-y-4">
+                    <button id="google-login-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-google hover:opacity-90 transition"><svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C42.312,34.657,44,29.696,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M10.21,28.811C9.404,26.536,9,24,9,24s0-2.536,0.81-4.811l-5.657-5.657C2.355,16.845,1,20.251,1,24s1.355,7.155,4.363,10.468L10.21,28.811z"></path><path fill="#EA4335" d="M43.611,20.083l-5.657,5.657C36.34,24.344,34.333,24,32.21,24h-8.21v8h11.303c3.246,0,5.903-2.09,6.963-5.023l-5.657-5.657z"></path></svg><span class="font-semibold text-gray-700">Sign in with Google</span></button>
+                    <button id="facebook-login-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-facebook hover:opacity-90 transition"><svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"></path></svg><span class="font-semibold">Sign in with Facebook</span></button>
+                    <button id="apple-login-btn" class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-apple hover:bg-gray-800 transition border border-gray-600"><svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M19.33,12.24c0-2.38-1.54-3.84-3.83-3.84c-1.28,0-2.4,0.76-3.19,0.76c-0.8,0-2.11-0.78-3.41-0.78c-2.35,0-4.24,1.52-4.24,4.03c0,2.94,2.26,5.64,3.7,7.24c0.75,0.82,1.54,1.66,2.55,1.66c1,0,1.34-0.63,2.8-0.63c1.45,0,1.75,0.63,2.8,0.63c1.03,0,1.76-0.81,2.5-1.64c0.92-1.02,1.49-2.01,1.72-2.95C21.72,14.54,19.33,13.68,19.33,12.24z M12.01,5.29c0.91-1.12,2.3-1.8,3.52-1.8c0.16,1.4-0.5,2.78-1.51,3.58c-0.89,0.7-2.25,1.49-3.49,1.49C10.38,8.55,9.75,7.5,9.75,6.33C9.75,5.81,10.87,5.4,12.01,5.29z"></path></svg><span class="font-semibold">Sign in with Apple</span></button>
                 </div>
-                <h class="text-2xl sm:text-3xl font-bold text-lightgray mb-6 text-center">Login to Cycle</h>
-                <div class="w-full space-y-6">
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                        <input type="email" id="email" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-lightgray focus:outline-none focus:border-lightgray transition" placeholder="Enter your email">
-                    </div>
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
-                        <input type="password" id="password" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-lightgray focus:outline-none focus:border-lightgray transition" placeholder="Enter your password">
-                    </div>
-                    <button class="w-full bg-lightgray hover:bg-gray-200 text-dark font-semibold py-3 px-6 rounded-md transition duration-300">Sign In</button>
-                    <p class="text-center text-sm text-gray-400">
-                        Don't have an account? <a href="register.html" class="text-lightgray hover:text-gray-300 transition">Register here</a>
-                    </p>
+                <div class="my-6 flex items-center"><div class="flex-grow border-t border-gray-700"></div><span class="mx-4 text-sm text-gray-400">OR</span><div class="flex-grow border-t border-gray-700"></div></div>
+
+                <form id="login-form" class="space-y-4">
+                    <div><label for="login-email" class="block text-sm font-medium text-gray-400 mb-2">Email</label><input type="email" id="login-email" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-white transition" placeholder="admin@gmail.com atau user@gmail.com"></div>
+                    <div><label for="login-password" class="block text-sm font-medium text-gray-400 mb-2">Password</label><div class="relative"><input type="password" id="login-password" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-white transition" placeholder="12345678"><button type="button" class="password-toggle absolute inset-y-0 right-0 px-4 text-gray-500 hover:text-white"></button></div></div>
+                    <div id="login-error" class="text-red-500 text-sm text-center hidden pt-1"></div>
+                    <button type="submit" class="w-full bg-white hover:bg-gray-200 text-dark font-semibold py-3 px-6 rounded-md transition duration-300">Sign In</button>
+                </form>
+            </div>
+
+            <div id="register-panel" class="tab-panel">
+                 <h2 class="text-2xl font-bold text-center mb-6">Create an Account</h2>
+                 <div class="space-y-4">
+                    <button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-google hover:opacity-90 transition"><svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#34A853" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l5.657,5.657C42.312,34.657,44,29.696,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FBBC05" d="M10.21,28.811C9.404,26.536,9,24,9,24s0-2.536,0.81-4.811l-5.657-5.657C2.355,16.845,1,20.251,1,24s1.355,7.155,4.363,10.468L10.21,28.811z"></path><path fill="#EA4335" d="M43.611,20.083l-5.657,5.657C36.34,24.344,34.333,24,32.21,24h-8.21v8h11.303c3.246,0,5.903-2.09,6.963-5.023l-5.657-5.657z"></path></svg><span class="font-semibold text-gray-700">Sign up with Google</span></button>
+                    <button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-facebook hover:opacity-90 transition"><svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.32 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"></path></svg><span class="font-semibold">Sign up with Facebook</span></button>
+                    <button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-brand-apple hover:bg-gray-800 transition border border-gray-600"><svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="currentColor" d="M19.33,12.24c0-2.38-1.54-3.84-3.83-3.84c-1.28,0-2.4,0.76-3.19,0.76c-0.8,0-2.11-0.78-3.41-0.78c-2.35,0-4.24,1.52-4.24,4.03c0,2.94,2.26,5.64,3.7,7.24c0.75,0.82,1.54,1.66,2.55,1.66c1,0,1.34-0.63,2.8-0.63c1.45,0,1.75,0.63,2.8,0.63c1.03,0,1.76-0.81,2.5-1.64c0.92-1.02,1.49-2.01,1.72-2.95C21.72,14.54,19.33,13.68,19.33,12.24z M12.01,5.29c0.91-1.12,2.3-1.8,3.52-1.8c0.16,1.4-0.5,2.78-1.51,3.58c-0.89,0.7-2.25,1.49-3.49,1.49C10.38,8.55,9.75,7.5,9.75,6.33C9.75,5.81,10.87,5.4,12.01,5.29z"></path></svg><span class="font-semibold">Sign up with Apple</span></button>
                 </div>
+                 <div class="my-6 flex items-center"><div class="flex-grow border-t border-gray-700"></div><span class="mx-4 text-sm text-gray-400">OR</span><div class="flex-grow border-t border-gray-700"></div></div>
+                <form class="space-y-4">
+                    <div><label for="reg-name" class="block text-sm font-medium text-gray-400 mb-2">Full Name</label><input type="text" id="reg-name" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-white transition" placeholder="Andi Budiman"></div>
+                    <div><label for="reg-email" class="block text-sm font-medium text-gray-400 mb-2">Email</label><input type="email" id="reg-email" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-white transition" placeholder="you@example.com"></div>
+                    <div><label for="reg-password" class="block text-sm font-medium text-gray-400 mb-2">Password</label><div class="relative"><input type="password" id="reg-password" class="w-full bg-dark border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-white transition" placeholder="••••••••"><button type="button" class="password-toggle absolute inset-y-0 right-0 px-4 text-gray-500 hover:text-white"></button></div></div>
+                    <button class="w-full bg-white hover:bg-gray-200 text-dark font-semibold py-3 px-6 rounded-md transition duration-300">Create Account</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginTabBtn = document.getElementById('login-tab-btn');
+        const registerTabBtn = document.getElementById('register-tab-btn');
+        const loginPanel = document.getElementById('login-panel');
+        const registerPanel = document.getElementById('register-panel');
+        const passwordToggles = document.querySelectorAll('.password-toggle');
+        const loginForm = document.getElementById('login-form');
+        const loginEmail = document.getElementById('login-email');
+        const loginPassword = document.getElementById('login-password');
+        const loginError = document.getElementById('login-error');
+        
+        const googleLoginBtn = document.getElementById('google-login-btn');
+        const facebookLoginBtn = document.getElementById('facebook-login-btn');
+        const appleLoginBtn = document.getElementById('apple-login-btn');
+
+        const eyeIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`;
+        const eyeSlashIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274-4.057 5.064 7-9.542 7 .847 0 1.67.126 2.453.364m-4.031 4.031a3 3 0 114.243 4.242M19.5 19.5l-15-15" /></svg>`;
+
+        passwordToggles.forEach(toggle => { toggle.innerHTML = eyeIcon; });
+
+        function switchTab(activeTab, inactiveTab, activePanel, inactivePanel) {
+            activeTab.classList.add('active');
+            inactiveTab.classList.remove('active');
+            activePanel.classList.add('active');
+            inactivePanel.classList.remove('active');
+        }
+
+        loginTabBtn.addEventListener('click', () => switchTab(loginTabBtn, registerTabBtn, loginPanel, registerPanel));
+        registerTabBtn.addEventListener('click', () => switchTab(registerTabBtn, loginTabBtn, registerPanel, loginPanel));
+        
+        passwordToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const passwordInput = toggle.previousElementSibling;
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggle.innerHTML = eyeSlashIcon;
+                } else {
+                    passwordInput.type = 'password';
+                    toggle.innerHTML = eyeIcon;
+                }
             });
         });
+
+        // --- Login Logic ---
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = loginEmail.value;
+            const password = loginPassword.value;
+
+            // Sembunyikan pesan error setiap kali tombol ditekan
+            loginError.classList.add('hidden');
+
+            if (email === 'admin@gmail.com' && password === '12345678') {
+                // Login Admin berhasil
+                window.location.href = 'dashboard.html';
+            } else if (email === 'user@gmail.com' && password === '12345678') {
+                // Login User berhasil
+                window.location.href = 'index.html';
+            }
+             else {
+                // Login gagal
+                loginError.textContent = 'Invalid email or password.';
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        const redirectToIndex = () => { window.location.href = 'index.html'; };
+        googleLoginBtn.addEventListener('click', redirectToIndex);
+        facebookLoginBtn.addEventListener('click', redirectToIndex);
+        appleLoginBtn.addEventListener('click', redirectToIndex);
+
+    });
     </script>
 </body>
 </html>
