@@ -11,7 +11,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {   
+                    colors: {  
                         dark: '#121212',
                         darkgray: '#1a1a1a',
                         lightgray: '#f5f5f5',
@@ -126,6 +126,9 @@
                             <a href="profile-settings.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
                                 Profile Settings
                             </a>
+                            <a href="history-transactions.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Transaction
+                            </a>
                             <a href="login.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
                                 Logout
                             </a>
@@ -192,7 +195,15 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="mt-8 pt-8 border-t border-gray-700">
+                            <h3 class="text-lg font-semibold text-lightgray mb-2">Transaction History</h3>
+                            <p class="text-gray-400 mb-4">Check your past order history and transaction details.</p>
+                            <a href="history-transactions.html" class="inline-block bg-dark hover:bg-gray-900 text-lightgray font-medium py-2 px-4 rounded-md transition duration-300">
+                                View My Transactions
+                            </a>
+                        </div>
+                        </div>
                 </div>
             </div>
         </div>

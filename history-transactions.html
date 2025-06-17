@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle | Transaction History</title>
-        <link rel="icon" type="image/png" href="image/logo.png">
-
+    <link rel="icon" type="image/png" href="image/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -25,73 +24,16 @@
         }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: #121212;
-            color: #f5f5f5;
-            font-family: 'Inter', sans-serif;
-        }
-        /* Mobile menu animations */
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        .mobile-menu.open {
-            max-height: 500px;
-            opacity: 1;
-        }
-        /* Hamburger icon animation */
-        .hamburger-line {
-            display: block;
-            width: 24px;
-            height: 2px;
-            margin: 5px auto;
-            background-color: #f5f5f5;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger.open .line1 {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .hamburger.open .line2 {
-            opacity: 0;
-        }
-        .hamburger.open .line3 {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-        /* Responsive badge styling */
-        .badge {
-            font-size: clamp(0.65rem, 2vw, 0.75rem);
-            padding: 0.25rem 0.5rem;
-        }
-        /* Dropdown menu styling */
-        .profile-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #1a1a1a;
-            border: 1px solid #374151;
-            border-radius: 0.375rem;
-            min-width: 150px;
-            z-index: 50;
-        }
-        .profile-dropdown.open {
-            display: block;
-        }
-        @media (max-width: 640px) {
-            .navbar-container {
-                flex-wrap: wrap;
-            }
-            .desktop-nav {
-                display: none;
-            }
-            .mobile-menu {
-                width: 100%;
-            }
+        html { scroll-behavior: smooth; }
+        body { background-color: #121212; color: #f5f5f5; font-family: 'Inter', sans-serif; }
+        .profile-dropdown { display: none; position: absolute; top: 100%; right: 0; background-color: #1a1a1a; border: 1px solid #374151; border-radius: 0.375rem; min-width: 150px; z-index: 50; }
+        .profile-dropdown.open { display: block; }
+        .action-btn {
+            padding: 0.375rem 0.75rem; /* 6px 12px */
+            font-size: 0.75rem; /* 12px */
+            font-weight: 500;
+            border-radius: 0.375rem; /* 6px */
+            transition: background-color 0.2s;
         }
     </style>
 </head>
@@ -132,6 +74,9 @@
                             <a href="profile-settings.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
                                 Profile Settings
                             </a>
+                            <a href="history-transactions.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
+                                Transactions
+                            </a>
                             <a href="login.html" class="block px-4 py-2 text-sm text-[#A0A0A0] hover:bg-[#252525] hover:text-[#f5f5f5] transition-colors">
                                 Logout
                             </a>
@@ -158,251 +103,253 @@
         </div>
     </header>
 
-    <!-- Transaction History Section -->
-    <section id="transaction-history" class="py-12 bg-dark">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8">Transaction History</h2>
-            <!-- Filter Controls -->
-            <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                <select id="status-filter" class="bg-darkgray border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-gray-500">
-                    <option value="all">All Status</option>
-                    <option value="completed">Completed</option>
-                    <option value="pending">Pending</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-                <select id="date-sort" class="bg-darkgray border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-gray-500">
-                    <option value="desc">Newest First</option>
-                    <option value="asc">Oldest First</option>
-                </select>
-            </div>
-            <!-- Transaction List -->
-            <div id="transaction-list" class="bg-darkgray rounded-lg overflow-hidden">
-                <div class="p-6 space-y-6">
-                    <!-- Transaction Items (Populated by JavaScript) -->
+    <main class="py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-8">
+                <h1 class="text-2xl sm:text-3xl font-bold text-lightgray">Transaction History</h1>
+                <div class="flex items-center gap-4">
+                    <select id="status-filter" class="bg-darkgray border border-gray-700 rounded-md p-2 text-sm text-lightgray focus:outline-none focus:ring-2 focus:ring-gray-500">
+                        <option value="all">All Statuses</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Pending Payment">Pending Payment</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <select id="date-sort" class="bg-darkgray border border-gray-700 rounded-md p-2 text-sm text-lightgray focus:outline-none focus:ring-2 focus:ring-gray-500">
+                        <option value="desc">Newest</option>
+                        <option value="asc">Oldest</option>
+                    </select>
                 </div>
-                <div id="transaction-empty" class="text-center text-gray-400 py-12 hidden">
-                    <p class="text-lg">No transactions found.</p>
-                    <a href="index.html" class="text-gray-300 hover:text-white underline mt-4 inline-block">Start Shopping</a>
+            </div>
+            
+            <div id="transaction-list" class="space-y-6"></div>
+
+            <div id="transaction-empty" class="text-center text-gray-400 py-16 hidden">
+                <h3 class="mt-2 text-lg font-medium text-lightgray">No transactions yet</h3>
+                <p class="mt-1 text-sm text-gray-500">Start shopping to see your order history here.</p>
+                <div class="mt-6">
+                    <a href="product-catalog.html" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-dark bg-lightgray hover:bg-gray-200">
+                        Start Shopping
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="w-full bg-[#121212] text-[#f5f5f5] px-6 md:px-12 lg:px-16 py-10 border-t border-[#252525]">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between border-b border-[#252525] pb-10">
-            <div class="md:w-1/2 flex flex-col md:flex-row md:pr-10">
-                <div class="mb-6 md:mb-0 md:mr-10">
-                    <h1 class="text-lg font-semibold text-[#f5f5f5] mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+    <footer class="w-full bg-dark text-lightgray px-4 sm:px-6 md:px-12 lg:px-16 py-10 border-t border-gray-800">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between border-b border-gray-800 pb-8 sm:pb-10">
+                <div class="md:w-1/2 flex flex-col md:flex-row md:pr-6 lg:pr-10">
+                    <div class="mb-6 md:mb-0 md:mr-6 lg:mr-10">
+                        <h1 class="text-lg sm:text-xl font-semibold text-lightgray mb-4 sm:mb-6 text-center md:text-left tracking-tight">Cycle</h1>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-sm sm:text-base mb-2 text-center md:text-left text-lightgray tracking-wide">Store Location</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed max-w-md text-center md:text-left tracking-wide">
+                            Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-semibold text-sm mb-2 text-center md:text-left text-[#f5f5f5] tracking-wide">Store Location</h3>
-                    <p class="text-sm text-[#A0A0A0] leading-relaxed max-w-md text-center md:text-left tracking-wide">
-                        Jl. Airlangga No.4 - 6, Airlangga, Kec. Gubeng, Kota SBY, Jawa Timur 60115
+                <div class="md:w-1/2 flex mt-6 md:mt-0 pl-0 md:pl-6 lg:pl-10 border-l border-gray-800">
+                    <div class="grid grid-cols-2 gap-x-6 sm:gap-x-10 w-full max-w-md">
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm sm:text-base mb-2 text-lightgray tracking-wide">Navigation</h3>
+                            <a href="landing-page.html" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Home</a>
+                            <a href="product-catalog.html" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Products</a>
+                            <a href="article-archieve.html" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Articles</a>
+                            <a href="about-us.html" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">About</a>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <h3 class="font-semibold text-sm sm:text-base mb-2 text-lightgray tracking-wide">Connect</h3>
+                            <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Instagram</a>
+                            <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Twitter</a>
+                            <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-gray-400 hover:text-lightgray transition tracking-wide">Facebook</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="md:w-1/2 flex mt-10 md:mt-0 pl-0 md:pl-10 border-l border-[#252525]">
-                <div class="grid grid-cols-2 gap-x-10 w-full max-w-md">
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Navigation</h3>
-                        <a href="landing-page.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Home</a>
-                        <a href="product-catalog.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Products</a>
-                        <a href="article-archieve.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Articles</a>
-                        <a href="about-us.html" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">About</a>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <h3 class="font-semibold text-sm mb-2 text-[#f5f5f5] tracking-wide">Connect</h3>
-                        <a href="https://instagram.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Instagram</a>
-                        <a href="https://twitter.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Twitter</a>
-                        <a href="https://facebook.com/cyclebikes" target="_blank" class="text-sm text-[#A0A0A0] tracking-wide hover:text-[#f5f5f5] hover:underline">Facebook</a>
-                    </div>
+            <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-gray-400 text-sm tracking-wide">
+                <p class="text-center">© 2010 — 2025 Cycle</p>
+                <div class="flex space-x-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-lightgray transition">Privacy</a>
+                    <span>—</span>
+                    <a href="#" class="hover:text-lightgray transition">Terms</a>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col md:flex-row justify-between items-center mt-6 text-[#A0A0A0] text-sm tracking-wide">
-            <p class="text-center">© 2010 — 2025 Cycle</p>
-            <div class="flex space-x-4 mt-2 md:mt-0">
-                <a href="#" class="hover:text-[#f5f5f5]">Privacy</a>
-                <span>—</span>
-                <a href="#" class="hover:text-[#f5f5f5]">Terms</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const profileBtn = document.getElementById('profile-btn');
-            const profileDropdown = document.getElementById('profile-dropdown');
+            // --- Navigation Logic (Same as before) ---
+
+            // --- Transaction Data & Logic ---
             const transactionList = document.getElementById('transaction-list');
             const transactionEmpty = document.getElementById('transaction-empty');
             const statusFilter = document.getElementById('status-filter');
             const dateSort = document.getElementById('date-sort');
-
-            // Sample transaction data (replace with real data from a backend or localStorage)
+            
+            // --- MAIN CHANGE: DUMMY DATA WITH NEW STATUS FROM CUSTOMER PERSPECTIVE ---
             let transactions = [
                 {
-                    id: 'ORD001',
-                    date: '2025-05-15',
+                    id: 'CYC-2506-001',
+                    date: '2025-06-15',
+                    status: 'Completed', // New status
+                    shipping: 150000,
+                    deliveredDate: '2025-06-18', // Additional info
                     items: [
-                        { name: 'Road Bike Pro', quantity: 1, price: 1200.00 },
-                        { name: 'Cycling Helmet', quantity: 2, price: 80.00 }
-                    ],
-                    total: 1370.00, // Including $10 shipping
-                    status: 'Completed',
-                    billing: {
-                        fullName: 'John Doe',
-                        email: 'john@example.com',
-                        address: '123 Main St, Jakarta',
-                        paymentMethod: 'Credit Card'
-                    }
+                        { name: 'Pinarello Dogma F12 2021', quantity: 1, price: 180000000, image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80' }
+                    ]
                 },
                 {
-                    id: 'ORD002',
-                    date: '2025-05-10',
+                    id: 'CYC-2506-002',
+                    date: '2025-06-12',
+                    status: 'Shipped', // New status
+                    shipping: 50000,
+                    trackingNumber: 'JNE-SB192837465', // Additional info
                     items: [
-                        { name: 'Mountain Bike', quantity: 1, price: 1500.00 }
-                    ],
-                    total: 1510.00, // Including $10 shipping
-                    status: 'Pending',
-                    billing: {
-                        fullName: 'Jane Smith',
-                        email: 'jane@example.com',
-                        address: '456 Oak Ave, Bandung',
-                        paymentMethod: 'PayPal'
-                    }
+                        { name: 'Urban Bike City', quantity: 1, price: 10500000, image: 'https://pacific-bike.com/wp-content/uploads/2024/11/OFO-7-SP_4-500x375.jpg'},
+                        { name: 'LED Bike Light', quantity: 2, price: 375000, image: 'https://s.alicdn.com/@sc04/kf/H14ee0a669f664976b53475157819de16W.jpg_720x720q50.jpg'}
+                    ]
                 },
                 {
-                    id: 'ORD003',
-                    date: '2025-05-05',
+                    id: 'CYC-2505-003',
+                    date: '2025-05-28',
+                    status: 'Processing', // New status
+                    shipping: 25000,
                     items: [
-                        { name: 'Bike Lock', quantity: 1, price: 50.00 }
-                    ],
-                    total: 60.00, // Including $10 shipping
-                    status: 'Cancelled',
-                    billing: {
-                        fullName: 'Alex Brown',
-                        email: 'alex@example.com',
-                        address: '789 Pine Rd, Surabaya',
-                        paymentMethod: 'Bank Transfer'
-                    }
+                        { name: 'Cycling Jersey', quantity: 1, price: 900000, image: 'https://img.id.my-best.com/product_images/80c06f27a0810a5b061be4a56b431a2f.jpeg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=875d60d82d6b9db5d8e57df143772385'},
+                        { name: 'Padded Shorts', quantity: 1, price: 675000, image: 'https://www.motoworld.com.ph/cdn/shop/products/INNERSHORTS-1.jpg?v=1669252112'}
+                    ]
+                },
+                {
+                    id: 'CYC-2505-004',
+                    date: '2025-05-25',
+                    status: 'Pending Payment', // New status
+                    shipping: 25000,
+                    paymentDueDate: '2025-05-26 23:59',
+                    items: [
+                        { name: 'U-Lock Steel', quantity: 1, price: 600000, image: 'https://upload.jaknot.com/2020/09/images/products/486fc2/original/west-biking-u-lock-gembok-sepeda-anti-maling-cs-1602050.jpg'}
+                    ]
+                },
+                {
+                    id: 'CYC-2504-005',
+                    date: '2025-04-10',
+                    status: 'Cancelled', // New status
+                    shipping: 0,
+                    items: [
+                        { name: 'Basic Tune-Up Service', quantity: 1, price: 750000, image: 'https://asset-2.tstatic.net/suryamalang/foto/bank/images/kopi-bike-bengkel-sepeda-malang.jpg'}
+                    ]
                 }
             ];
 
-            // Function to render transactions
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+            }
+            
+            // --- CHANGE: Adjusted Badge Style and Card Display Logic ---
             function renderTransactions(filteredTransactions) {
                 transactionList.innerHTML = '';
                 if (filteredTransactions.length === 0) {
                     transactionEmpty.classList.remove('hidden');
-                    transactionList.classList.add('hidden');
                     return;
                 }
-
+                
                 transactionEmpty.classList.add('hidden');
-                transactionList.classList.remove('hidden');
+
+                const statusStyles = {
+                    'Completed': 'bg-green-500/20 text-green-400',
+                    'Shipped': 'bg-blue-500/20 text-blue-400',
+                    'Processing': 'bg-gray-400/20 text-gray-300',
+                    'Pending Payment': 'bg-yellow-500/20 text-yellow-400',
+                    'Cancelled': 'bg-red-500/20 text-red-400',
+                };
 
                 filteredTransactions.forEach(transaction => {
-                    const transactionElement = document.createElement('div');
-                    transactionElement.className = 'border-b border-gray-700 py-4';
-                    transactionElement.innerHTML = `
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    const total = transaction.items.reduce((sum, item) => sum + item.price * item.quantity, 0) + transaction.shipping;
+                    const transactionCard = document.createElement('div');
+                    transactionCard.className = 'bg-darkgray rounded-lg p-4 sm:p-6 shadow-lg';
+
+                    let extraInfoHTML = '';
+                    let actionsHTML = '';
+
+                    // Logic to display info & action buttons based on status
+                    switch(transaction.status) {
+                        case 'Shipped':
+                            extraInfoHTML = `<p class="text-xs text-gray-400 mt-1">Tracking No.: <span class="font-medium text-gray-300">${transaction.trackingNumber}</span></p>`;
+                            actionsHTML = `<button class="action-btn bg-blue-600 hover:bg-blue-700 text-white">Track Order</button>`;
+                            break;
+                        case 'Completed':
+                            extraInfoHTML = `<p class="text-xs text-green-400 mt-1">Delivered on ${new Date(transaction.deliveredDate).toLocaleDateString('en-US', {day:'numeric', month:'long'})}</p>`;
+                            actionsHTML = `
+                                <button class="action-btn bg-dark hover:bg-gray-900 text-lightgray border border-gray-600">Buy Again</button>
+                                <button class="action-btn bg-lightgray hover:bg-gray-300 text-dark">Write a Review</button>
+                            `;
+                            break;
+                        case 'Pending Payment':
+                            extraInfoHTML = `<p class="text-xs text-yellow-400 mt-1">Pay before ${new Date(transaction.paymentDueDate).toLocaleString('en-US', {day:'numeric', month:'long', hour:'2-digit', minute:'2-digit'})}</p>`;
+                            actionsHTML = `<button class="action-btn bg-yellow-500 hover:bg-yellow-600 text-dark">Payment Instructions</button>`;
+                            break;
+                        default:
+                            actionsHTML = `<a href="#" class="text-sm text-gray-400 hover:text-white hover:underline">View Details</a>`;
+                    }
+                    
+                    transactionCard.innerHTML = `
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-start border-b border-gray-700 pb-4 mb-4">
                             <div>
-                                <h3 class="text-lg font-medium">Order #${transaction.id}</h3>
-                                <p class="text-sm text-gray-400">${new Date(transaction.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                                <p class="text-sm text-gray-400">${transaction.items.map(item => `${item.name} (${item.quantity})`).join(', ')}</p>
+                                <h3 class="text-base sm:text-lg font-bold text-lightgray">Order #${transaction.id}</h3>
+                                <p class="text-xs sm:text-sm text-gray-400">${new Date(transaction.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                ${extraInfoHTML}
                             </div>
-                            <div class="flex items-center gap-6">
-                                <div>
-                                    <p class="text-sm text-gray-400">Total</p>
-                                    <p class="text-lg font-medium">$${transaction.total.toFixed(2)}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-400">Status</p>
-                                    <p class="text-sm font-medium ${
-                                        transaction.status === 'Completed' ? 'text-green-500' :
-                                        transaction.status === 'Pending' ? 'text-yellow-500' :
-                                        'text-red-500'
-                                    }">${transaction.status}</p>
-                                </div>
-                                <button data-id="${transaction.id}" class="view-details-btn text-gray-300 hover:text-white underline">View Details</button>
-                            </div>
+                            <span class="badge ${statusStyles[transaction.status]} text-xs font-medium px-2.5 py-1 rounded-full mt-2 sm:mt-0">${transaction.status}</span>
                         </div>
-                        <div data-id="${transaction.id}" class="details hidden mt-4 bg-dark p-4 rounded-lg">
-                            <h4 class="text-md font-semibold mb-2">Billing Details</h4>
-                            <p class="text-sm text-gray-400">Name: ${transaction.billing.fullName}</p>
-                            <p class="text-sm text-gray-400">Email: ${transaction.billing.email}</p>
-                            <p class="text-sm text-gray-400">Address: ${transaction.billing.address}</p>
-                            <p class="text-sm text-gray-400">Payment Method: ${transaction.billing.paymentMethod}</p>
-                            <h4 class="text-md font-semibold mt-4 mb-2">Items</h4>
+                        
+                        <div class="space-y-4">
                             ${transaction.items.map(item => `
-                                <p class="text-sm text-gray-400">${item.name} (${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</p>
+                                <div class="flex items-center gap-4">
+                                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover bg-gray-700">
+                                    <div class="flex-grow">
+                                        <p class="font-medium text-lightgray text-sm">${item.name}</p>
+                                        <p class="text-xs text-gray-400">${item.quantity} x ${formatCurrency(item.price)}</p>
+                                    </div>
+                                    <p class="text-sm font-semibold text-lightgray">${formatCurrency(item.quantity * item.price)}</p>
+                                </div>
                             `).join('')}
-                            <p class="text-sm text-gray-400 mt-2">Shipping: $10.00</p>
-                            <p class="text-sm font-medium mt-2">Total: $${transaction.total.toFixed(2)}</p>
+                        </div>
+
+                        <div class="border-t border-gray-700 pt-4 mt-4 flex justify-between items-center">
+                             <div class="flex items-center gap-2">
+                                ${actionsHTML}
+                             </div>
+                             <div class="text-right">
+                                <p class="text-xs text-gray-400">TOTAL</p>
+                                <p class="text-lg font-bold text-lightgray">${formatCurrency(total)}</p>
+                             </div>
                         </div>
                     `;
-                    transactionList.appendChild(transactionElement);
+                    transactionList.appendChild(transactionCard);
                 });
             }
 
-            // Function to filter and sort transactions
             function filterAndSortTransactions() {
-                let filteredTransactions = [...transactions];
+                let filtered = [...transactions];
                 const status = statusFilter.value;
                 const sort = dateSort.value;
-
-                // Filter by status
                 if (status !== 'all') {
-                    filteredTransactions = filteredTransactions.filter(t => t.status.toLowerCase() === status);
+                    filtered = filtered.filter(t => t.status === status);
                 }
-
-                // Sort by date
-                filteredTransactions.sort((a, b) => {
+                filtered.sort((a, b) => {
                     const dateA = new Date(a.date);
                     const dateB = new Date(b.date);
                     return sort === 'desc' ? dateB - dateA : dateA - dateB;
                 });
-
-                renderTransactions(filteredTransactions);
+                renderTransactions(filtered);
             }
 
-            // Event delegation for view details buttons
-            transactionList.addEventListener('click', function(e) {
-                const btn = e.target.closest('.view-details-btn');
-                if (btn) {
-                    const id = btn.dataset.id;
-                    const details = transactionList.querySelector(`.details[data-id="${id}"]`);
-                    details.classList.toggle('hidden');
-                    btn.textContent = details.classList.contains('hidden') ? 'View Details' : 'Hide Details';
-                }
-            });
-
-            // Event listeners for filter and sort
             statusFilter.addEventListener('change', filterAndSortTransactions);
             dateSort.addEventListener('change', filterAndSortTransactions);
-
-            // Hamburger menu toggle
-            hamburgerBtn.addEventListener('click', function() {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            });
-
-            // Profile dropdown toggle
-            profileBtn.addEventListener('click', function() {
-                profileDropdown.classList.toggle('open');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
-                    profileDropdown.classList.remove('open');
-                }
-            });
-
-            // Initial render
             filterAndSortTransactions();
         });
     </script>
